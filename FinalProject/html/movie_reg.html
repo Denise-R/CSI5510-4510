@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<title>FinalProject</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
+		<link rel="stylesheet" href="CSS/base.css" />
+    </head>
+
+	<body>
+		<br/><br/><br/><br/><br/><br/><br/>
+	<section>     
+	<head>
+		<div style="float: right;">
+			<button  id="home" onclick="document.location='C:\\jakarta-tomcat-5.0.25\\webapps\\FinalProject\\index.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="search" onclick="document.location=''" title="Search Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="add" title="Add Movie"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="edit" onclick="document.location='movie_upd.html'" title="Edit Movie"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="delete" onclick="document.location='movie_del.html'" title="Delete Movie" onclick="document.location='movie_del.html'"></button>&nbsp;&nbsp;&nbsp;
+
+
+		</div>
+		<h2 id="pageTitle">Add Movie</h2>
+	</head>  
+
+		<form method = "post" action = "/Movie/movie_reg">
+			<p>Movie ID: <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="number" min="1" name="m_id" placeholder="1"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				Movie Title: <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type = "text" name = "m_title" size="21">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Description:&nbsp;&nbsp;&nbsp;
+			   	<input id="descInput" type = "text" name = "m_synopsis" size = "70"> 
+			   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<br/><br/><br/>
+
+				Release Date: &nbsp;&nbsp;&nbsp;<input id="numInput" type = "date" name = "m_date" size = "10">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Length:&nbsp;&nbsp;&nbsp;
+			   	<input id="numInput" type="number" min="1" name = "m_length" size = "15">
+				   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Category:&nbsp;&nbsp;&nbsp;
+				<select id="dropDown" size = "1" name = "cat_id">
+					<option value = "1">Action</option>
+					<option value = "2">Animation</option>
+					<option value = "3">Comedy</option>
+					<option value = "4">Drama</option>
+					<option value = "5">Family</option>
+					<option value = "6">Herror</option>
+					<option value = "7">Romance</option>
+					<option value = "8">Fantasy</option>
+				</select>
+			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Rating:&nbsp;&nbsp;&nbsp; 
+				<select id="dropDown" size = "1" name = "rating_id">
+				<option value = "1">G</option>
+				<option value = "2">R</option>
+				<option value = "3">PG</option>
+				<option value = "4">PG-13</option>
+				</select>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<br/><br/><br/>
+				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="buttons" type = "reset" value = "Reset">
+			</p>
+		</form>
+
+		<br/><br/><br/><br/>
+	
+		<center>
+			<br/><br/>
+		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+	</section>    
+
+
+	</body>
+</html>
+     
+
+

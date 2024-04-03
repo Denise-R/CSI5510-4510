@@ -1,0 +1,133 @@
+/* general text formatting */
+body {
+    font-family: "Roboto", Verdana, Arial, sans-serif;
+    font-size: 100%;
+    background-image: url('Images/film.png');
+    background-color: #ECEFF1;
+
+}
+
+section {
+  background-color: #B8A5D2;
+  height: 400px;
+  padding: 15pt;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.btn-float-right{
+float: right;
+}
+
+#pageButtons {
+  border: none;
+  color: #4472C4;
+  text-align: center;
+  display: inline-block;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  height: 50px;
+  width: 320px;
+}
+
+#buttons {
+  border: none;
+  color: #4472C4;
+  text-align: center;
+  display: inline-block;
+  font-size: 12px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  height: 30px;
+  width: 120px;
+}
+
+#buttons, #home, #search, #add, #edit, #delete, #pageButtons{
+  background-color: #4472C4; 
+  color: black; 
+  border: 2px solid black;
+}
+
+#buttons:hover, #home:hover, #search:hover, #add:hover, #edit:hover, #delete:hover, #pageButtons:hover{
+background-color: white;
+  color: black;
+}
+
+#home{
+border: none;
+  display: inline-block;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  background: url('Images/homeIcon.png');
+  background-repeat: 3px 5px no-repeat;
+}
+
+#search{
+  border: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    background: url('Images/searchIcon.png');
+    background-repeat: 3px 5px no-repeat;
+  }
+
+#add{
+  border: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    background: url('Images/addIcon2.jpg');
+    background-repeat: 3px 5px no-repeat;
+  }
+
+#edit{
+  border: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    background: url('Images/editIcon.png');
+    background-repeat: 3px 5px no-repeat;
+  }
+
+#delete{
+  border: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    background: url('Images/xIcon.jpg');
+    background-repeat: 3px 5px no-repeat;
+  }
+
+#pageTable {
+  margin: 0;
+  padding: 0;
+}
+
+#numInput{
+  height: 25px;
+  width: 200px;
+  cursor: pointer;
+}
+
+#descInput{
+  height: 25px;
+  width: 500px;
+  cursor: pointer;
+}
+
+#dropDown{
+height: 30px;
+width: 200px;
+cursor: pointer;
+}
