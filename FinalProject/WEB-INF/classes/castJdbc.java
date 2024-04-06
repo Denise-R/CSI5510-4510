@@ -3,7 +3,7 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.sql.*;
 
-public class movieJdbc extends HttpServlet 
+public class castJdbc extends HttpServlet 
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
@@ -47,12 +47,12 @@ public class movieJdbc extends HttpServlet
   			e.printStackTrace();
 		}
 		
-		query = "SELECT MovieID, Title, ReleaseDate, Synopsis, Rating, LengthMin, Category, CostMil, ScreeningType FROM movie";
+		query = "select m.MovieID, m.title, p.PersonID, p.FirstName, p.LastName,  c.CharName, p.PayK, p.PersonType FROM MOVIE m, PERSON p, CAST c WHERE m.MovieID = c.MovieID AND p.personID = c.personID";
 		
-		out.println("<html><head><title>Moive Table Report</title>");	 
+		out.println("<html><head><title>Cast Table Report</title>");	 
 		out.println("</head><body>");
 		
-		out.print( "<br /><b><center><font color=\"RED\"><H2>Movie Table Report</H2></font>");
+		out.print( "<br /><b><center><font color=\"RED\"><H2>Cast Table Report</H2></font>");
         out.println( "</center><br />" );
        	try 
 		{ 
@@ -65,14 +65,13 @@ public class movieJdbc extends HttpServlet
 		out.println("<center><table border=\"1\">"); 
 		out.println("<tr BGCOLOR=\"#cccccc\">");
         out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie ID</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Title</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Release Date</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Synopsis</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Rating</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Duration (min)</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Category</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Cost (mil)</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Screening Type</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie Title</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person ID</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">First Name</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Last Name</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Character Name</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Pay (K)</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person Type</td>");
         out.println("</tr>");
 		try 
 		{ 
@@ -87,7 +86,6 @@ public class movieJdbc extends HttpServlet
 				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(6)+"</td>");
 				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(7)+"</td>");
 				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(8)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(9)+"</td>");
                 out.println("</tr>");
 			} 
 	    }
