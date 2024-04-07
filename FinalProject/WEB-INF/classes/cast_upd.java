@@ -3,24 +3,27 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.sql.*;
 
-public class cast_del extends HttpServlet 
+public class cast_upd extends HttpServlet 
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
     {        
 			Statement state4 = null;
 			ResultSet result = null;
-			String query1="";        
+			String query="";        
 			Connection con=null; 
           
-            String c_id = (request.getParameter("CastID").toString());
+			String c_id = (request.getParameter("CastID").toString());
+			String char_name = (request.getParameter("CharName").toString());
+			String m_id = (request.getParameter("MovieID").toString());
 			String p_id = (request.getParameter("PersonID").toString());
+			
 
 		try
 		{			
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
             con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
-	       	System.out.println("Congratulations! You are connected successfully.");      
+	       	System.out.println("Congratulations! You are connected successfully.");     
      	}
         catch(SQLException e)
 		{	
@@ -50,16 +53,16 @@ public class cast_del extends HttpServlet
   			e.printStackTrace();
 		}
 		
-		query1 = "delete from cast where CastID = '" + c_id + "' and PersonID = '" + p_id + "'";
-
-		out.println("<html><head><title>Cast has been deleted</title>");	 
+		query = "update  cast set c_id = '"+c_id+"', char_name = '"+char_name+"',  m_id = '"+m_id+"', p_id = '"+p_id+"'	where c_id = '"+c_id+"'";
+		
+		out.println("<html><head><title>Cast Character Name has been updtated</title>");	 
 		out.println("</head><body>");
 		
-		out.print( "<br /><b><center><font color=\"BLACK\"><H2>One Record has deleted</H2></font>");
+		out.print( "<br /><b><center><font color=\"BLACK\"><H2>One Record has updated</H2></font>");
         out.println( "</center><br />" );
        	try 
 		{ 
-			result=state4.executeQuery(query1);
+			result=state4.executeQuery(query);
 				
 	  	}
 		catch (SQLException e) 

@@ -3,23 +3,26 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.sql.*;
 
-public class showtimes_upd extends HttpServlet 
+public class person_upd extends HttpServlet 
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
     {        
 			Statement state4 = null;
 			ResultSet result = null;
-			String query1="";       
+			String query="";        
 			Connection con=null; 
           
-            String show_id = (request.getParameter("ShowtimeID").toString());
-            String show_date = (request.getParameter("Showtime").toString());
+			String p_id = (request.getParameter("PersonID").toString());
+			String p_fname = (request.getParameter("FirstName").toString());
+			String p_lname = (request.getParameter("LastName").toString());
+			String p_pay = (request.getParameter("PayK").toString());
+			String p_type = (request.getParameter("PersonType").toString());
 
 		try
 		{			
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
-            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
+            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "project", "project");
 	       	System.out.println("Congratulations! You are connected successfully.");      
      	}
         catch(SQLException e)
@@ -50,17 +53,16 @@ public class showtimes_upd extends HttpServlet
   			e.printStackTrace();
 		}
 		
-
-		query1 = "update  showtimes set show_id = '"+show_id+"', show_date = '"+show_date+"' where show_id = '"+show_id+"'";
-
-		out.println("<html><head><title>Showtime has been updated</title>");	 
+		query = "update  movie set p_id = '"+p_id+"', p_fname = '"+p_fname+"',  p_lname = '"+p_lname+"', p_pay = '"+p_pay+"', p_type = '"+p_type+"'	where p_id = '"+p_id+"'";
+		
+		out.println("<html><head><title>Person has been updtated</title>");	 
 		out.println("</head><body>");
 		
 		out.print( "<br /><b><center><font color=\"BLACK\"><H2>One Record has updated</H2></font>");
         out.println( "</center><br />" );
        	try 
 		{ 
-			result=state4.executeQuery(query1);
+			result=state4.executeQuery(query);
 				
 	  	}
 		catch (SQLException e) 
@@ -70,6 +72,7 @@ public class showtimes_upd extends HttpServlet
 		out.println("<center><table border=\"1\">"); 
 		out.println("<tr BGCOLOR=\"#cccccc\">");
           out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\"> </td>");
+       // out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">movtitle</td>");
         out.println("</tr>");
 		try 
 		{ 
@@ -77,6 +80,7 @@ public class showtimes_upd extends HttpServlet
 			{ 
 		    		out.println("<tr>");
                 		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
+		    		//out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
                 		out.println("</tr>");
 			} 
 	    }

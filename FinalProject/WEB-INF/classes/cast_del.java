@@ -52,7 +52,7 @@ public class cast_del extends HttpServlet
 		
 		query1 = "delete from cast where CastID = '" + c_id + "' and PersonID = '" + p_id + "'";
 
-		out.println("<html><head><title>Cast has been deleted</title>");	 
+		out.println("<html><head><title>Cast Memberhas been deleted</title>");	 
 		out.println("</head><body>");
 		
 		out.print( "<br /><b><center><font color=\"BLACK\"><H2>One Record has deleted</H2></font>");

@@ -3,24 +3,26 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.sql.*;
 
-public class crew_del extends HttpServlet 
+public class crew_upd extends HttpServlet 
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
     {        
 			Statement state4 = null;
 			ResultSet result = null;
-			String query1="";       
+			String query="";        
 			Connection con=null; 
           
-            String c_id = (request.getParameter("CrewID").toString());
+			String c_id = (request.getParameter("CastID").toString());
+			String c_contr = (request.getParameter("Contribution").toString());
+			String m_id = (request.getParameter("MovieID").toString());
 			String p_id = (request.getParameter("PersonID").toString());
 
 		try
 		{			
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
             con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
-	       	System.out.println("Congratulations! You are connected successfully.");      
+	       	System.out.println("Congratulations! You are connected successfully.");    
      	}
         catch(SQLException e)
 		{	
@@ -50,16 +52,16 @@ public class crew_del extends HttpServlet
   			e.printStackTrace();
 		}
 		
-		query1 = "delete from crew where CrewID = '" + c_id + "' and PersonID = '" + p_id + "'";
-
-		out.println("<html><head><title>Movie has been deleted</title>");	 
+		query = "update  crew set c_id = '"+c_id+"', c_contr = '"+c_contr+"',  m_id = '"+m_id+"', p_id = '"+p_id+"'	where c_id = '"+c_id+"'";
+		
+		out.println("<html><head><title>Crew Member has been updtated</title>");	 
 		out.println("</head><body>");
 		
-		out.print( "<br /><b><center><font color=\"BLACK\"><H2>One Record has deleted</H2></font>");
+		out.print( "<br /><b><center><font color=\"BLACK\"><H2>One Record has updated</H2></font>");
         out.println( "</center><br />" );
        	try 
 		{ 
-			result=state4.executeQuery(query1);
+			result=state4.executeQuery(query);
 				
 	  	}
 		catch (SQLException e) 
