@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<title>FinalProject</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
+		<link rel="stylesheet" href="CSS/base.css" />
+    </head>
+
+	<body>
+		<br/><br/><br/><br/><br/><br/><br/>
+	<section>     
+	<head>
+		<div style="float: right;">
+			<p><a href="\FinalProject\index.html">
+				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="search" onclick="document.location='/FinalProject/movieJdbc'" title="Search Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="add" title="Add Movie"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="edit" onclick="document.location='movie_upd.html'" title="Edit Movie"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="delete" onclick="document.location='movie_del.html'" title="Delete Movie" onclick="document.location='movie_del.html'"></button>&nbsp;&nbsp;&nbsp;
+			</p>
+
+		</div>
+		<h2 id="pageTitle">Add Movie</h2>
+	</head>  
+	<br/>
+		<form method = "get" action = "/FinalProject/movie_reg">
+			<p>Movie Title: <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type = "text" name = "Title" size="21">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Synopsis: <font color = "#FF0000">*&nbsp;</font>
+			   	<input id="descInput" type = "text" name = "Synopsis" size = "70"> 
+			   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Release Date: <font color = "#FF0000">*&nbsp;</font><input id="numInput" type = "date" name = "ReleaseDate" size = "10">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<br/><br/><br/>
+
+				Rating: <font color = "#FF0000">*&nbsp;</font>
+				<select id="dropDown" size = "1" name = "Rating">
+				<option value = "G">G</option>
+				<option value = "R">R</option>
+				<option value = "PG">PG</option>
+				<option value = "PG-13">PG-13</option>
+				</select>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				
+				Duration (min): <font color = "#FF0000">*&nbsp;</font>
+			   	<input id="numInput" type="number" min="1" name = "LengthMin" size = "15" placeholder="90">
+				   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Category: <font color = "#FF0000">*&nbsp;</font>
+				<select id="dropDown" size = "Action" name = "Category">
+					<option value = "Action">Action</option>
+					<option value = "Animation">Animation</option>
+					<option value = "Comedy">Comedy</option>
+					<option value = "Drama">Drama</option>
+					<option value = "Family">Family</option>
+					<option value = "Herror">Herror</option>
+					<option value = "Romance">Romance</option>
+					<option value = "Fantasy">Fantasy</option>
+				</select>
+			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+
+				  Cost (mil): <font color = "#FF0000">*&nbsp;</font>
+				  <input id="numInput" type="number" min="1" name="CostMil" placeholder="1"/>
+				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<br/><br/><br/>
+
+				Screening Type: <font color = "#FF0000">*&nbsp;</font>
+				<select id="dropDown" size = "Coming Soon" name = "ScreeningType">
+					<option value = "Coming Soon">Coming Soon</option>
+					<option value = "Showing">Showing</option>
+				</select>
+			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<br/><br/><br/>
+				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="buttons" type = "reset" value = "Reset">
+			</p>
+		</form>
+
+		
+	
+		<center>
+			<br/>
+		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+	</section>     
+
+
+	</body>
+</html>
+     
+
+

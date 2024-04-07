@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<title>FinalProject</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
+		<link rel="stylesheet" href="CSS/base.css" />
+    </head>
+
+	<body>
+		<br/><br/><br/><br/><br/><br/><br/>
+	<section>     
+	<head>
+		<div style="float: right;">
+			<p><a href="\FinalProject\index.html">
+				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="filter" onclick="document.location='filter_reg.html'" title="Filters"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="mTable" onclick="document.location='/FinalProject/movieJdbc'" title="Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="pTable" onclick="document.location='/FinalProject/personJdbc'" title="Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="castTable" onclick="document.location='/FinalProject/castJdbc'" title="Cast"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="crewTable" onclick="document.location='/FinalProject/crewJdbc'" title="Crew"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="sTable" onclick="document.location='/FinalProject/showtimesJdbc'" title="Showtimes"></button>&nbsp;&nbsp;&nbsp;
+			</p>
+		</div>
+		<h2 id="pageTitle">Filter Movies by Crew Member</h2>
+	</head>  
+	<br/>
+		<form method ="get" action="/FinalProject/filter_one">
+
+		    	Crew Type:<font color = "#FF0000">*&nbsp;</font>
+				<select id="dropDown" size = "Director" name = "PersonType">
+					<option value="Director">Director</option>
+					<option value="Producer">Producer</option>
+                    <option value="Writer">Writer</option>
+				</select>
+			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Person ID:<font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="number" min="1" name="PersonID" placeholder="1"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<br/><br/><br/>
+                <div class="filter-button-container">
+				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="buttons" type = "reset" value = "Reset">
+                </div>
+			</p>
+		</form>
+
+		<br/><br/><br/><br/><br/><br/>
+	
+		<center/>
+			<br/><br/>
+		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+	</section>    
+
+
+	</body>
+</html>
+     
+
+

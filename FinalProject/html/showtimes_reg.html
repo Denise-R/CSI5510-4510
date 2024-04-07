@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<title>FinalProject</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
+		<link rel="stylesheet" href="CSS/base.css" />
+    </head>
+
+	<body>
+		<br/><br/><br/><br/><br/><br/><br/>
+	<section>     
+	<head>
+		<div style="float: right;">
+			<p><a href="\FinalProject\index.html">
+				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="search" onclick="document.location='/FinalProject/showtimesJdbc'" title="Search Showtimes"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="add" title="Add Showtimes"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="edit" onclick="document.location='showtimes_upd.html'" title="Edit Showtimes"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="delete" onclick="document.location='showtimes_del.html'" title="Delete Showtimes"></button>&nbsp;&nbsp;&nbsp;
+			</p>
+		</div>
+		<h2 id="pageTitle">Add Showtimes</h2>
+	</head>  
+	<br/>
+		<form method = "get" action = "/FinalProject/showtimes_reg">
+			<p>Theater Name:<font color = "#FF0000">*&nbsp;</font>
+				<select id="dropDown" size = "1" name = "TheaterName">
+					<option value = "AMC Forum 25">AMC Forum 25</option>
+					<option value = "AMC Forum 30">AMC Forum 30</option>
+					<option value = "Emagine">Emagine</option>
+				</select>
+			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Movie ID:<font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="number" min="1" name="MovieID" placeholder="1"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Screen ID:<font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="number" min="1" name="ScreenID" placeholder="1"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				
+				Showtime:<font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type = "datetime-local" name = "Showtime" size = "10">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<br/><br/><br/>
+				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="buttons" type = "reset" value = "Reset">
+			</p>
+		</form>
+
+		<br/><br/><br/><br/><br/>
+	
+		<center>
+			<br/><br/>
+		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+	</section>    
+
+
+	</body>
+</html>
+     
+
+

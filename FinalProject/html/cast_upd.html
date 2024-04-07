@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<title>FinalProject</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
+		<link rel="stylesheet" href="CSS/base.css" />
+    </head>
+
+	<body>
+		<br/><br/><br/><br/><br/><br/><br/>
+	<section>     
+	<head>
+		<div style="float: right;">
+			<p><a href="\FinalProject\index.html">
+				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="search" onclick="document.location='/FinalProject/castJdbc'" title="Search Cast"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="add"  onclick="document.location='cast_reg.html'" title="Add Cast"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="edit" title="Edit Cast"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="delete" onclick="document.location='cast_del.html'" title="Delete Cast"></button>&nbsp;&nbsp;&nbsp;
+			</p>
+		</div>
+		<h2 id="pageTitle">Update Cast Member Character Name</h2>
+	</head>  
+	<br/>
+		<form method = "get" action = "/Movie/cast_upd">
+			<p>Cast ID: <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="number" min="1" name="CastID" placeholder="1"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				Person ID: <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="number" min="1" name="PersonID" placeholder="1"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Movie ID: <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="number" min="1" name="MovieID" placeholder="1"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+				Character Name: <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="text" name="CharName"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<br/><br/><br/>
+				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="buttons" type = "reset" value = "Reset">
+			</p>
+		</form>
+
+		<br/><br/><br/><br/><br/><br/>
+	
+		<center>
+			<br/><br/>
+		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+	</section>    
+
+
+	</body>
+</html>
+     

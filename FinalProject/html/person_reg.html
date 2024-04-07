@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8">
+		<title>FinalProject</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
+		<link rel="stylesheet" href="CSS/base.css" />
+    </head>
+
+	<body>
+		<br/><br/><br/><br/><br/><br/><br/>
+	<section>     
+	<head>
+		<div style="float: right;">
+			<p><a href="\FinalProject\index.html">
+				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="search" onclick="document.location='/FinalProject/personJdbc'" title="Search People"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="add"  title="Add Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="edit" onclick="document.location='person_upd.html'" title="Edit Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button  id="delete" onclick="document.location='person_del.html'" title="Delete Person"></button>&nbsp;&nbsp;&nbsp;
+			</p>
+		</div>
+		<h2 id="pageTitle">Add Person</h2>
+	</head>  
+	<br/>
+		<form method = "get" action = "/FinalProject/person_reg">
+			<p><p>First Name: <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type = "text" name = "FirstName" size="21">&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Last Name: <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type = "text" name = "LastName" size="21">&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				Pay (K): <font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="number" min="1" name="PayK" placeholder="1"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				PersonType: <font color = "#FF0000">*&nbsp;</font>
+				<select id="dropDown" size = "Actor" name = "PersonType">
+					<option value = "Actor">Actor</option>
+					<option value = "Actress">Actress</option>
+					<option value = "Director">Director</option>
+					<option value = "Producer">Producer</option>
+					<option value = "Writer">Writer</option>
+				</select>
+			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<br/><br/><br/>
+				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="buttons" type = "reset" value = "Reset">
+			</p>
+		</form>
+
+		<br/><br/><br/><br/><br/><br/>
+	
+		<center>
+			<br/><br/>
+		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+	</section>    
+
+
+	</body>
+</html>
+     
+
+
