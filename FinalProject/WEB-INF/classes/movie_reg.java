@@ -12,56 +12,30 @@ public class movie_reg extends HttpServlet
 			ResultSet result = null;
 			String query1=""; 
 			String query2=""; 
-
+			String m_date="";
 			Connection con=null; 
           
 			String m_title = request.getParameter("Title");
-			String m_date = (request.getParameter("ReleaseDate")).toString();
+			var date = request.getParameter("ReleaseDate");
 			String m_synopsis = request.getParameter("Synopsis");
 			String m_length = (request.getParameter("LengthMin")).toString();
 			String m_rating = request.getParameter("Rating");
 			String m_cat = request.getParameter("Category");
 			String m_cost = (request.getParameter("CostMil")).toString();
 			String m_sType = request.getParameter("ScreeningType");
-      System.out.println(m_date.substring(5, 7)); 
-      String m_month = "jan";
-      String m_day = m_date.substring(8, 10);
-      String m_year = m_date.substring(0, 4);
-      
-      if (m_date.substring(5, 7) == "01"){
-      m_month = "jan";
-      }else if (m_date.substring(5, 7) == "02"){
-      m_month = "feb";
-      }else if (m_date.substring(5, 7) == "03"){
-      m_month = "mar";
-      }else if (m_date.substring(5, 7) == "04"){
-      m_month = "apr";
-      }else if (m_date.substring(5, 7) == "05"){
-      m_month = "may";
-      }else if (m_date.substring(5, 7) == "06"){
-      m_month = "jun";
-      }else if (m_date.substring(5, 7) == "07"){
-      m_month = "jul";
-      }else if (m_date.substring(5, 7) == "08"){
-      m_month = "aug";
-      }else if (m_date.substring(5, 7) == "09"){
-      m_month = "sep";
-      }else if (m_date.substring(5, 7) == "10"){
-      m_month = "oct";
-      }else if (m_date.substring(5, 7) == "11"){
-      m_month = "nov";
-      }else{
-      m_month = "dec";}
-      
-      m_date = m_year + "/" + m_month + "/" + m_day;
+
+			var month = (('0' + (date.getMonth() + 1)).slice(-2)). toString(); // Adding 1 because January is 0
+			var day = ('0' + date.getDate()).slice(-2);
+			var year = date.getFullYear();
+
+    		m_date = year + "-" + month +"-" + day;
 
 		try
 		{			
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
             con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
 	       	System.out.println("Congratulations! You are connected successfully.");      
-	       	System.out.println(m_date);     
-           System.out.println(m_month);  
+	       	
      	}
         catch(SQLException e)
 		{	
@@ -90,9 +64,11 @@ public class movie_reg extends HttpServlet
 		{
   			e.printStackTrace();
 		}
+
+		//TO_DATE('12-04-2024', 'DD-MM-YYYY')
 		
 		query1 = "INSERT INTO MOVIE (MovieID, Title, ReleaseDate, Synopsis, Rating, LengthMin, Category, CostMil, ScreeningType) " +
-		" VALUES (seq_mov_id.nextval, '" + m_title + "', '" + m_date + "', '" + m_synopsis + "', '" + m_rating + "', " + m_length + ", '" + m_cat + "', " + m_cost + ", '" + m_sType + "')";
+		" VALUES (seq_mov_id.nextval, '" + m_title + "', TO_DATE(''" + m_date + "'', 'YYYY-MM-DD'), ' " + m_synopsis + "', '" + m_rating + "', " + m_length + ", '" + m_cat + "', " + m_cost + ", '" + m_sType + "')";
 
 		query2 = "SELECT MovieID, Title, ReleaseDate, Synopsis, Rating, LengthMin, Category, CostMil, ScreeningType FROM movie order by MovieID";
 

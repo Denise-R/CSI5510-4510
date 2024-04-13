@@ -10,19 +10,20 @@ public class person_upd extends HttpServlet
     {        
 			Statement state4 = null;
 			ResultSet result = null;
-			String query="";        
+			String query1="";        
+			String query2="";        
 			Connection con=null; 
           
-			String p_id = (request.getParameter("PersonID").toString());
-			String p_fname = (request.getParameter("FirstName").toString());
-			String p_lname = (request.getParameter("LastName").toString());
-			String p_pay = (request.getParameter("PayK").toString());
-			String p_type = (request.getParameter("PersonType").toString());
+			String p_id = (request.getParameter("PersonID")).toString();
+			String p_fname = (request.getParameter("FirstName")).toString();
+			String p_lname = (request.getParameter("LastName")).toString();
+			String p_pay = (request.getParameter("PayK")).toString();
+			String p_type = (request.getParameter("PersonType")).toString();
 
 		try
 		{			
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
-            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "project", "project");
+            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
 	       	System.out.println("Congratulations! You are connected successfully.");      
      	}
         catch(SQLException e)
@@ -51,19 +52,23 @@ public class person_upd extends HttpServlet
 		catch (IOException e) 
 		{
   			e.printStackTrace();
-		}
+		}			
 		
-		query = "update  movie set p_id = '"+p_id+"', p_fname = '"+p_fname+"',  p_lname = '"+p_lname+"', p_pay = '"+p_pay+"', p_type = '"+p_type+"'	where p_id = '"+p_id+"'";
-		
-		out.println("<html><head><title>Person has been updtated</title>");	 
+		query1 = " update person set LastName = '"+p_lname+"', FirstName = '"+p_fname+"', PayK = '"+p_pay+"', PersonType = '"+p_type+"' where personID = '"+p_id+"'";			
+
+		query2 = "SELECT PersonID, FirstName,  LastName, PayK, PersonType FROM person order by PersonID";
+
+		out.println("<html><head><title>FinalProject</title>");	 
 		out.println("</head><body>");
 		
-		out.print( "<br /><b><center><font color=\"BLACK\"><H2>One Record has updated</H2></font>");
+		out.print( "<br /><b><center><font color=\"RED\"><H2>Person Table</H2></font>");
+		out.println("<div><center><font color=\"RED\"><p>You have updated information on "+p_fname+" "+p_lname+"!</p></div>");
+
         out.println( "</center><br />" );
        	try 
 		{ 
-			result=state4.executeQuery(query);
-				
+			result=state4.executeQuery(query1);
+			result=state4.executeQuery(query2);
 	  	}
 		catch (SQLException e) 
 		{
@@ -71,17 +76,23 @@ public class person_upd extends HttpServlet
 		}
 		out.println("<center><table border=\"1\">"); 
 		out.println("<tr BGCOLOR=\"#cccccc\">");
-          out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\"> </td>");
-       // out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">movtitle</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person ID</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">First Name</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Last Name</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Pay (K)</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person Type</td>");
         out.println("</tr>");
 		try 
 		{ 
             while(result.next()) 
 			{ 
-		    		out.println("<tr>");
-                		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
-		    		//out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
-                		out.println("</tr>");
+		    	out.println("<tr>");
+                out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
+		    	out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(3)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(4)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(5)+"</td>");
+                out.println("</tr>");
 			} 
 	    }
 		catch (SQLException e) 

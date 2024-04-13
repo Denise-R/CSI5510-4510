@@ -11,10 +11,10 @@ public class crew_reg extends HttpServlet
 			Statement state4 = null;
 			ResultSet result = null;
 			String query1=""; 
+			String query2=""; 
 
 			Connection con=null; 
           
-			String c_id = (request.getParameter("CrewID").toString());
 			String c_contr = (request.getParameter("Contribution").toString());
 			String m_id = (request.getParameter("MovieID").toString());
 			String p_id = (request.getParameter("PersonID").toString());
@@ -54,9 +54,11 @@ public class crew_reg extends HttpServlet
   			e.printStackTrace();
 		}
 		
-		query1 = "INSERT INTO CREW (CrewID, Contribution, MovieID, PersonID) " +
-		" VALUES ('" + c_id + "', '" + c_contr + "', '" + m_id + "', '" + p_id + "')";
 
+		query1 = "INSERT INTO CREW(CrewID, Contribution, MovieID, PersonID) " +
+		" VALUES(seq_crew_id.nextval, '" + c_contr + "', '" + m_id + "', '" + p_id + "')";
+		query2 = "select c.CrewID, m.MovieID, m.title, p.PersonID,  p.FirstName, p.LastName, c.Contribution, p.PayK, p.PersonType FROM MOVIE m, PERSON p, CREW c WHERE m.MovieID = c.MovieID AND p.personID = c.personID order by c.CrewID";
+		
 
 		out.println("<html><head><title>FinalProject</title>");	 
 		out.println("</head><body>");
@@ -66,6 +68,7 @@ public class crew_reg extends HttpServlet
        	try 
 		{ 
 			result=state4.executeQuery(query1);
+			result=state4.executeQuery(query2);
 
 	  	}
 		catch (SQLException e) 
@@ -75,9 +78,14 @@ public class crew_reg extends HttpServlet
 		out.println("<center><table border=\"1\">"); 
 		out.println("<tr BGCOLOR=\"#cccccc\">");
         out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Crew ID</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Contribution</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie ID/td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie ID</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie Title</td>");
         out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person ID</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">First Name</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Last Name</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Contribution</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Pay (K)</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person Type</td>");
         out.println("</tr>");
 		try 
 		{ 
@@ -88,6 +96,11 @@ public class crew_reg extends HttpServlet
 		    	out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
 				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(3)+"</td>");
 				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(4)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(5)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(6)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(7)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(8)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(9)+"</td>");
                 out.println("</tr>");
 			} 
 	    }

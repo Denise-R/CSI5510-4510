@@ -10,7 +10,8 @@ public class cast_upd extends HttpServlet
     {        
 			Statement state4 = null;
 			ResultSet result = null;
-			String query="";        
+			String query1="";        
+			String query2="";        
 			Connection con=null; 
           
 			String c_id = (request.getParameter("CastID").toString());
@@ -53,17 +54,19 @@ public class cast_upd extends HttpServlet
   			e.printStackTrace();
 		}
 		
-		query = "update  cast set c_id = '"+c_id+"', char_name = '"+char_name+"',  m_id = '"+m_id+"', p_id = '"+p_id+"'	where c_id = '"+c_id+"'";
+		query1 = "update  cast set CharName = '"+char_name+"' where CastID = '"+c_id+"' and MovieID = '"+m_id+"' and PersonID = '"+p_id+"'";
 		
-		out.println("<html><head><title>Cast Character Name has been updtated</title>");	 
+		query2 = "select c.CastID, m.MovieID, m.title, p.PersonID, p.FirstName, p.LastName,  c.CharName, p.PayK, p.PersonType FROM MOVIE m, PERSON p, CAST c WHERE m.MovieID = c.MovieID AND p.personID = c.personID order by c.CastID";
+		
+		out.println("<html><head><title>FinalProject</title>");	 
 		out.println("</head><body>");
 		
-		out.print( "<br /><b><center><font color=\"BLACK\"><H2>One Record has updated</H2></font>");
+		out.print( "<br /><b><center><font color=\"RED\"><H2>Cast Members Table</H2></font>");
         out.println( "</center><br />" );
        	try 
 		{ 
-			result=state4.executeQuery(query);
-				
+			result=state4.executeQuery(query1);
+			result=state4.executeQuery(query2);
 	  	}
 		catch (SQLException e) 
 		{
@@ -71,17 +74,31 @@ public class cast_upd extends HttpServlet
 		}
 		out.println("<center><table border=\"1\">"); 
 		out.println("<tr BGCOLOR=\"#cccccc\">");
-          out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\"> </td>");
-       // out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">movtitle</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Cast ID</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie ID</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie Title</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person ID</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">First Name</td>");
+        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Last Name</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Character Name</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Pay (K)</td>");
+		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person Type</td>");
         out.println("</tr>");
 		try 
 		{ 
             while(result.next()) 
 			{ 
-		    		out.println("<tr>");
-                		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
-		    		//out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
-                		out.println("</tr>");
+		    	out.println("<tr>");
+                out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
+		    	out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(3)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(4)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(5)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(6)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(7)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(8)+"</td>");
+				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(9)+"</td>");
+                out.println("</tr>");
 			} 
 	    }
 		catch (SQLException e) 
