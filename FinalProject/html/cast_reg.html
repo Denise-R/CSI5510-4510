@@ -13,6 +13,7 @@
 	<section>     
 	<head>
 		<div style="float: right;">
+			<!-- redirect to other pages -->
 			<p><a href="\FinalProject\index.html">
 				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="search" onclick="document.location='/FinalProject/castJdbc'" title="Search People"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -26,20 +27,24 @@
 	</head>  
 
 		<form method = "get" action = "/FinalProject/cast_reg">
+			<!-- person ID, limited to only number inputs -->
 			<p>Person ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="PersonID" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="PersonID"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!-- movieID, limited to only number inputs -->
 				Movie ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="MovieID" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="MovieID"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
+			<!--Character name, any string characters -->
 				Character Name: <font color = "#FF0000">*&nbsp;</font>
 				<input id="numInput" type="text" name="CharName"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
 			</p>

@@ -13,6 +13,7 @@
 	<section>     
 	<head>
 		<div style="float: right;">
+			<!-- redirect to other pages -->
 			<p><a href="\FinalProject\index.html">
 				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="search" onclick="document.location='/FinalProject/movieJdbc'" title="Search Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -25,14 +26,17 @@
 	</head>  
 
 		<form method = "get" action = "/FinalProject/movie_del">
+			<!-- movieID, limited to only number inputs -->
 			<p>Movie ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="int" min="1" name="MovieID" placeholder="1"/>
+				<input id="numInput" type="int" min="1" name="MovieID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
+			<!--movie title, any string characters -->
 				Movie Title: <font color = "#FF0000">*&nbsp;</font>
 				<input id="numInput" type = "text" name = "Title" size="21">&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<br/><br/><br/>
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
 			</p>

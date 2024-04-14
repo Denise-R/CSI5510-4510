@@ -7,14 +7,15 @@ public class castJdbc extends HttpServlet
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
-    {        
+    {       // declare variables 
 			Statement state4 = null;
 			ResultSet result = null;
 			String query="";        
 			Connection con=null; 
 
 		try
-		{			
+		{	
+			// connect to SQLPlus database			
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
             con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
 	       	System.out.println("Congratulations! You are connected successfully.");      
@@ -47,14 +48,17 @@ public class castJdbc extends HttpServlet
   			e.printStackTrace();
 		}
 		
+		// build query
 		query = "select c.CastID, m.MovieID, m.title, p.PersonID, p.FirstName, p.LastName,  c.CharName, p.PayK, p.PersonType FROM MOVIE m, PERSON p, CAST c WHERE m.MovieID = c.MovieID AND p.personID = c.personID order by c.CastID";
 		
-		out.println("<html><head><title>FinalProject</title>");	 
-		out.println("</head><body>");
-		
-		out.print( "<br /><b><center><font color=\"RED\"><H2>Cast Members Table</H2></font>");
-        out.println( "</center><br />" );
-       	try 
+		//write to html file
+		out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>FinalProject</title>");
+		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
+		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
+       	
+		//exec query
+		try 
 		{ 
 			result=state4.executeQuery(query);
 	  	}
@@ -62,32 +66,41 @@ public class castJdbc extends HttpServlet
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
-		out.println("<center><table border=\"1\">"); 
-		out.println("<tr BGCOLOR=\"#cccccc\">");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Cast ID</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie ID</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie Title</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person ID</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">First Name</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Last Name</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Character Name</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Pay (K)</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person Type</td>");
+
+		//write to html
+		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
+		out.println("<head><div style=\"float: right;\">");
+		out.println("<p><a href=\"\\FinalProject\\index.html\">");
+		out.println("<img border=\"0\" src=\"\\FinalProject\\html\\CSS\\Images\\homeIcon.png\" width=\"30\" height=\"30\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		out.println("</p></div><h2 id=\"pageTitle\">Cast Table</h2></head>");
+		out.println("<center><table>"); 
+		out.println("<tr>");
+        out.println("<th>Cast ID</th>");
+        out.println("<th>Movie ID</th>");
+        out.println("<th>Movie Title</th>");
+        out.println("<th>Person ID</th>");
+		out.println("<th>First Name</th>");
+        out.println("<th>Last Name</th>");
+		out.println("<th>Character Name</th>");
+		out.println("<th>Pay (K)</th>");
+		out.println("<th>Person Type</th>");
         out.println("</tr>");
+
+		//get table data from query executed
 		try 
 		{ 
             while(result.next()) 
 			{ 
 		    	out.println("<tr>");
-                out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
-		    	out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(3)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(4)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(5)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(6)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(7)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(8)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(9)+"</td>");
+                out.println("     <td>"+result.getString(1)+"</td>");
+		    	out.println("     <td>"+result.getString(2)+"</td>");
+				out.println("     <td>"+result.getString(3)+"</td>");
+				out.println("     <td>"+result.getString(4)+"</td>");
+				out.println("     <td>"+result.getString(5)+"</td>");
+				out.println("     <td>"+result.getString(6)+"</td>");
+				out.println("     <td>"+result.getString(7)+"</td>");
+				out.println("     <td>"+result.getString(8)+"</td>");
+				out.println("     <td>"+result.getString(9)+"</td>");
                 out.println("</tr>");
 			} 
 	    }
@@ -97,6 +110,8 @@ public class castJdbc extends HttpServlet
 		}
 
 		out.println("</table></CENTER>");
+
+		// close connection
 		try 
 		{ 
    			result.close(); 
@@ -109,6 +124,8 @@ public class castJdbc extends HttpServlet
 			e.printStackTrace();	
 		}
 
+		//finish html document
+		out.println("<center><br/><br/><p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p></section>");
   		out.println("</body></html>");
     } 
 }

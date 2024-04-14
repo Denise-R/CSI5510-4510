@@ -13,6 +13,7 @@
 	<section>     
 	<head>
 		<div style="float: right;">
+			<!-- redirect to other pages -->
 			<p><a href="\FinalProject\index.html">
 				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="search" onclick="document.location='/FinalProject/crewJdbc'" title="Search People"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -26,20 +27,24 @@
 	</head>  
 
 		<form method = "get" action = "/FinalProject/crew_reg">
+			<!-- person ID, limited to only number inputs -->
 			<p>Person ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="PersonID" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="PersonID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!-- movie ID, limited to only number inputs -->
 				Movie ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="MovieID" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="MovieID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
+			<!--contribution, any string characters -->
 				Contribution: <font color = "#FF0000">*&nbsp;</font>
 				<input id="numInput" type="text" name="Contribution"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
 			</p>

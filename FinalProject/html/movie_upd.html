@@ -25,23 +25,28 @@
 	</head>  
 
 		<form method = "get" action = "/Movie/movie_upd">
+			<!-- movieID, limited to only number inputs -->
 			<p>Movie ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="MovieID" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="MovieID"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
+			<!--movie title, any string characters -->
 				Movie Title: <font color = "#FF0000">*&nbsp;</font>
 				<input id="numInput" type = "text" name = "Title" size="21">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!--synopsis, any string characters -->
 				Synopsis:&nbsp;&nbsp;&nbsp;
 			   	<input id="descInput" type = "text" name = "Synopsis" size = "70"> 
 			   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
 
+				<!-- release date, limited by date input -->
 				Release Date: &nbsp;&nbsp;&nbsp;<input id="numInput" type = "date" name = "ReleaseDate" size = "10">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+				<!-- rating, limited by drop down options -->
 				Rating:&nbsp;&nbsp;&nbsp; 
 				<select id="dropDown" size = "1" name = "Rating">
 				<option value = "G">G</option>
@@ -52,10 +57,12 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 				
+				<!-- duration, limited to number input -->
 				Duration (min):&nbsp;&nbsp;&nbsp;
-			   	<input id="numInput" type="number" min="1" name = "LengthMin" size = "15" placeholder="90">
+			   	<input id="numInput" type="number" min="1" name = "LengthMin" size = "15">
 				   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+				<!-- category, limited by drop down options -->
 				Category:&nbsp;&nbsp;&nbsp;
 				<select id="dropDown" size = "Action" name = "Category">
 					<option value = "Action">Action</option>
@@ -71,10 +78,12 @@
 				
 				<br/><br/><br/>
 
+				<!-- cost mil, limited to number input -->
 				Cost (mil):&nbsp;&nbsp;&nbsp;
-				<input id="numInput" type="number" min="1" name="CostMil" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="CostMil"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+				<!-- screening type, limited to comming soon or showing -->
 				Screening Type:&nbsp;&nbsp;&nbsp;
 				<select id="dropDown" size = "Coming Soon" name = "ScreeningType">
 					<option value = "Coming Soon">Coming Soon</option>
@@ -83,6 +92,7 @@
 			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
 			</p>

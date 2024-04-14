@@ -8,15 +8,18 @@ public class filter_nine extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
     {        
+			// declare variables 
 			Statement state4 = null;
 			ResultSet result = null;
 			String query="";        
 			Connection con=null; 
           
+			// get parameters
             String m_date = (request.getParameter("ReleaseDate")).toString();
 
 		try
 		{			
+			// connect to SQLPlus database	
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
             con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
 	       	System.out.println("Congratulations! You are connected successfully.");      
@@ -49,13 +52,16 @@ public class filter_nine extends HttpServlet
   			e.printStackTrace();
 		}
 		
+		// build query
 		query = "select m.MovieID, m.title, p.FirstName, p.LastName, p.personType FROM MOVIE m, PERSON p, Crew c WHERE m.MovieID = c.MovieID AND p.personID = c.personID AND m.movieID = (select m.MovieID FROM MOVIE m WHERE m.ReleaseDate like '%" + m_date + "' AND m.CostMil = (SELECT MAX(m.CostMil) FROM MOVIE m WHERE m.MovieID in (select m.MovieID FROM MOVIE m WHERE m.ReleaseDate like '%" + m_date + "')))";
 		
-		out.println("<html><head><title>FinalProject</title>");	 
-		out.println("</head><body>");
+		//write to html file
+		out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>FinalProject</title>");
+		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
+		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
 		
-		out.print( "<br /><b><center><font color=\"RED\"><H2>Most expensive Movie per Year</H2></font>");
-        out.println( "</center><br />" );
+		//exec query
        	try 
 		{ 
 			result=state4.executeQuery(query);
@@ -65,24 +71,35 @@ public class filter_nine extends HttpServlet
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
-		out.println("<center><table border=\"1\">"); 
-		out.println("<tr BGCOLOR=\"#cccccc\">");
-          out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie ID</td>");
-          out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie Title</td>");
-          out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">First Name</td>");
-          out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Last Name</td>");
-          out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Cast/Crew Type</td>");
-        out.println("</tr>");
+
+		//write to html
+		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
+		out.println("<head><div style=\"float: right;\">");
+		out.println("<p><a href=\"\\FinalProject\\index.html\">");
+		out.println("<img border=\"0\" src=\"\\FinalProject\\html\\CSS\\Images\\homeIcon.png\" width=\"30\" height=\"30\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		
+		// displaying filter settings
+		out.println("</p></div><h2 id=\"pageTitle\">Filter Most Expensive Movie per Year</h2><p>Year (yy): " + m_date + "</p></head>");
+		out.println("<center><br/><table>"); 
+		out.println("<tr>");
+		out.println("<th>Movie ID</th>");
+		out.println("<th>Movie Title</th>");
+		out.println("<th>First Name</th>");
+		out.println("<th>Last Name</th>");
+		out.println("<th>Cast/Crew Type</th>");
+	  out.println("</tr>");
+          
+		//get table data from query executed
 		try 
 		{ 
             while(result.next()) 
 			{ 
 		    		out.println("<tr>");
-                		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
-                		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
-                		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(3)+"</td>");
-                		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(4)+"</td>");
-                		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(5)+"</td>");
+                		out.println("<td>"+result.getString(1)+"</td>");
+                		out.println("<td>"+result.getString(2)+"</td>");
+                		out.println("<td>"+result.getString(3)+"</td>");
+                		out.println("<td>"+result.getString(4)+"</td>");
+                		out.println("<td>"+result.getString(5)+"</td>");
                 		out.println("</tr>");
 			} 
 	    }
@@ -92,6 +109,8 @@ public class filter_nine extends HttpServlet
 		}
 
 		out.println("</table></CENTER>");
+
+		// close connection
 		try 
 		{ 
    			result.close(); 
@@ -104,6 +123,8 @@ public class filter_nine extends HttpServlet
 			e.printStackTrace();	
 		}
 
-  		out.println("</body></html>");
+  		//finish html document
+		out.println("<center><br/><br/><p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p></section>");
+		out.println("</body></html>");
     } 
 }

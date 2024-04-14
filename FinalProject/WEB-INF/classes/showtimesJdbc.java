@@ -7,14 +7,15 @@ public class showtimesJdbc extends HttpServlet
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
-    {        
+    {        // declare variables  
 			Statement state4 = null;
 			ResultSet result = null;
 			String query="";        
 			Connection con=null; 
 
 		try
-		{			
+		{
+			// connect to SQLPlus database				
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
             con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
 	       	System.out.println("Congratulations! You are connected successfully.");      
@@ -47,14 +48,17 @@ public class showtimesJdbc extends HttpServlet
   			e.printStackTrace();
 		}
 		
+		// build query
 		query = "select s.ShowtimeID, s.TheaterName, s.MovieID, m.title, s.ScreenID, s.Showtime, m.LengthMin FROM MOVIE m, SHOWTIMES s where m.movieID = s.MovieID order by s.ShowtimeID";
 		
-		out.println("<html><head><title>FinalProject</title>");	 
-		out.println("</head><body>");
-		
-		out.print( "<br /><b><center><font color=\"RED\"><H2>Showtimes Table</H2></font>");
-        out.println( "</center><br />" );
-       	try 
+		//write to html file
+		out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>FinalProject</title>");
+		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
+		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
+       	
+		//exec query
+		try 
 		{ 
 			result=state4.executeQuery(query);
 	  	}
@@ -62,28 +66,37 @@ public class showtimesJdbc extends HttpServlet
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
-		out.println("<center><table border=\"1\">"); 
-		out.println("<tr BGCOLOR=\"#cccccc\">");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Showtime ID</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Theater Name</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie ID</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Title</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Screen No.</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Showtime</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Duration (min)</td>");
+
+		//write to html
+		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
+		out.println("<head><div style=\"float: right;\">");
+		out.println("<p><a href=\"\\FinalProject\\index.html\">");
+		out.println("<img border=\"0\" src=\"\\FinalProject\\html\\CSS\\Images\\homeIcon.png\" width=\"30\" height=\"30\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		out.println("</p></div><h2 id=\"pageTitle\">Showtimes Table</h2></head>");
+		out.println("<center><table>"); 
+		out.println("<tr>");
+        out.println("<th>Showtime ID</th>");
+        out.println("<th>Theater Name</th>");
+        out.println("<th>Movie ID</th>");
+        out.println("<th>Title</th>");
+		out.println("<th>Screen No.</th>");
+		out.println("<th>Showtime</th>");
+        out.println("<th>Duration (min)</th>");
         out.println("</tr>");
+
+		//get table data from query executed
 		try 
 		{ 
             while(result.next()) 
 			{ 
 		    	out.println("<tr>");
-                out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
-		    	out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(3)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(4)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(5)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(6)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(7)+"</td>");
+                out.println("     <td>"+result.getString(1)+"</td>");
+		    	out.println("     <td>"+result.getString(2)+"</td>");
+				out.println("     <td>"+result.getString(3)+"</td>");
+				out.println("     <td>"+result.getString(4)+"</td>");
+				out.println("     <td>"+result.getString(5)+"</td>");
+				out.println("     <td>"+result.getString(6)+"</td>");
+				out.println("     <td>"+result.getString(7)+"</td>");
                 out.println("</tr>");
 			} 
 	    }
@@ -93,6 +106,8 @@ public class showtimesJdbc extends HttpServlet
 		}
 
 		out.println("</table></CENTER>");
+
+		// close connection
 		try 
 		{ 
    			result.close(); 
@@ -105,6 +120,8 @@ public class showtimesJdbc extends HttpServlet
 			e.printStackTrace();	
 		}
 
+		//finish html document
+		out.println("<center><br/><br/><p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p></section>");
   		out.println("</body></html>");
     } 
 }

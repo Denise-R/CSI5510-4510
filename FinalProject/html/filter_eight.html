@@ -13,6 +13,7 @@
 	<section>     
 	<head>
 		<div style="float: right;">
+			<!-- redirect to other pages -->
 			<p><a href="\FinalProject\index.html">
 				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="filter" onclick="document.location='filter_reg.html'" title="Filters"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -29,6 +30,7 @@
 	<br/>
 		<form method = "get" action = "/FinalProject/filter_eight">
 
+			<!-- crew type, limited to only director, producer, writer -->
 				Crew Type:<font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Director" name = "CrewType">
 					<option value="Director">Director</option>
@@ -37,16 +39,19 @@
 				</select>
 			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                Crew ID:<font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="PersonID" placeholder="1"/>
+			<!-- person ID, limited to only number inputs -->
+                Person ID:<font color = "#FF0000">*&nbsp;</font>
+				<input id="numInput" type="number" min="1" name="PersonID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!-- max cost, limited to only numbers -->
 				Max Cost (mil):<font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="CostMil" placeholder="100"/>
+				<input id="numInput" type="number" min="1" name="CostMil"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
                 <div class="filter-button-container">
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
                 </div>

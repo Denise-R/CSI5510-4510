@@ -13,6 +13,7 @@
 	<section>     
 	<head>
 		<div style="float: right;">
+			<!-- redirect to other pages -->
 			<p><a href="\FinalProject\index.html">
 				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="search" onclick="document.location='/FinalProject/showtimesJdbc'" title="Search Showtimes"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -25,16 +26,19 @@
 	</head>  
 	<br/>
 		<form method = "get" action = "/Movie/showtimes_upd">
+			<!-- showtime ID, limited to only number inputs -->
 			<p>ShowtimeID:<font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="ShowtimeID" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="ShowtimeID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!-- showtime, limited to only a date input -->
 				Showtime:<font color = "#FF0000">*&nbsp;</font>
 				<input id="numInput" type = "datetime-local" name = "Showtime" size = "10">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 				<br/><br/><br/>
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
 			</p>

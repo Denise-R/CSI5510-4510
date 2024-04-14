@@ -13,6 +13,7 @@
 	<section>     
 	<head>
 		<div style="float: right;">
+			<!-- redirect to other pages -->
 			<p><a href="\FinalProject\index.html">
 				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="search" onclick="document.location='/FinalProject/showtimesJdbc'" title="Search Showtimes"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -33,20 +34,24 @@
 				</select>
 			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!-- movieID, limited to only number inputs -->
 				Movie ID:<font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="MovieID" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="MovieID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!-- screen ID, limited to only number inputs -->
 				Screen ID:<font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="ScreenID" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="ScreenID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				
+			<!-- showtime, limited to only date inputs -->
 				Showtime:<font color = "#FF0000">*&nbsp;</font>
 				<input id="numInput" type = "datetime-local" name = "Showtime" size = "10">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
 			</p>

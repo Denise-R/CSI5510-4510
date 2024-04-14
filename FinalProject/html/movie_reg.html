@@ -13,6 +13,7 @@
 	<section>     
 	<head>
 		<div style="float: right;">
+			<!-- redirect to other pages -->
 			<p><a href="\FinalProject\index.html">
 				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="search" onclick="document.location='/FinalProject/movieJdbc'" title="Search Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -26,19 +27,23 @@
 	</head>  
 	<br/>
 		<form method = "get" action = "/FinalProject/movie_reg">
+			<!--movie title, any string characters -->
 			<p>Movie Title: <font color = "#FF0000">*&nbsp;</font>
 				<input id="numInput" type = "text" name = "Title" size="21">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!--synopsis, any string characters -->
 				Synopsis: <font color = "#FF0000">*&nbsp;</font>
 			   	<input id="descInput" type = "text" name = "Synopsis" size = "70"> 
 			   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+				<!-- release date, limited by date input -->
 				Release Date: <font color = "#FF0000">*&nbsp;</font><input id="numInput" type = "date" name = "ReleaseDate" size = "10">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
 
+				<!-- rating, limited by drop down options -->
 				Rating: <font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "1" name = "Rating">
 				<option value = "G">G</option>
@@ -49,10 +54,12 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 				
+				<!-- duration, limited to number input -->
 				Duration (min): <font color = "#FF0000">*&nbsp;</font>
-			   	<input id="numInput" type="number" min="1" name = "LengthMin" size = "15" placeholder="90">
+			   	<input id="numInput" type="number" min="1" name = "LengthMin" size = "15">
 				   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+				<!-- category, limited by drop down options -->
 				Category: <font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Action" name = "Category">
 					<option value = "Action">Action</option>
@@ -67,12 +74,14 @@
 			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 
+				<!-- cost mil, limited to number input -->
 				  Cost (mil): <font color = "#FF0000">*&nbsp;</font>
-				  <input id="numInput" type="number" min="1" name="CostMil" placeholder="1"/>
+				  <input id="numInput" type="number" min="1" name="CostMil" />
 				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
 
+				<!-- screening type, limited to comming soon or showing -->
 				Screening Type: <font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Coming Soon" name = "ScreeningType">
 					<option value = "Coming Soon">Coming Soon</option>
@@ -81,6 +90,7 @@
 			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
 			</p>

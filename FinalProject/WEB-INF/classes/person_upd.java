@@ -8,12 +8,16 @@ public class person_upd extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
     {        
+		// declare variables 
 			Statement state4 = null;
+			ResultSet alertResult = null;       
 			ResultSet result = null;
 			String query1="";        
 			String query2="";        
+			String alertQuery="";  
 			Connection con=null; 
           
+			// get parameters
 			String p_id = (request.getParameter("PersonID")).toString();
 			String p_fname = (request.getParameter("FirstName")).toString();
 			String p_lname = (request.getParameter("LastName")).toString();
@@ -21,7 +25,8 @@ public class person_upd extends HttpServlet
 			String p_type = (request.getParameter("PersonType")).toString();
 
 		try
-		{			
+		{		
+			// connect to SQLPlus database	
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
             con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
 	       	System.out.println("Congratulations! You are connected successfully.");      
@@ -52,19 +57,61 @@ public class person_upd extends HttpServlet
 		catch (IOException e) 
 		{
   			e.printStackTrace();
-		}			
+		}	
 		
+		// alert query to notify that person has been deleted
+		try 
+		{ 
+			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
+			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
+			alertResult = pstmt1.executeQuery();
+
+	  	}
+		catch (SQLException e) 
+		{
+			System.err.println("SQLException while executing SQL Statement."); 
+		}
+		
+		// build query
 		query1 = " update person set LastName = '"+p_lname+"', FirstName = '"+p_fname+"', PayK = '"+p_pay+"', PersonType = '"+p_type+"' where personID = '"+p_id+"'";			
 
 		query2 = "SELECT PersonID, FirstName,  LastName, PayK, PersonType FROM person order by PersonID";
 
-		out.println("<html><head><title>FinalProject</title>");	 
-		out.println("</head><body>");
+		//write to html file
+		out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>FinalProject</title>");
+		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
+		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
 		
-		out.print( "<br /><b><center><font color=\"RED\"><H2>Person Table</H2></font>");
-		out.println("<div><center><font color=\"RED\"><p>You have updated information on "+p_fname+" "+p_lname+"!</p></div>");
-
-        out.println( "</center><br />" );
+		//exec query
+		try{
+			while (alertResult.next()) {
+			
+				String fname = alertResult.getString("FirstName");
+				String lname = alertResult.getString("LastName");
+				out.println("<script>function showAlertOnLoad() {alert(\"You have updated the person " + fname + " " + lname + "\");}</script>");
+			}
+		}
+		catch (SQLException e) 
+		{
+			System.err.println("SQLException while executing SQL Statement."); 
+		}
+		//write to html
+		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
+		out.println("<head><div style=\"float: right;\">");
+		out.println("<p><a href=\"\\FinalProject\\index.html\">");
+		out.println("<img border=\"0\" src=\"\\FinalProject\\html\\CSS\\Images\\homeIcon.png\" width=\"30\" height=\"30\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		out.println("</p></div><h2 id=\"pageTitle\">Person Table</h2></head>");
+		out.println("<center><table>"); 
+		out.println("<tr>");
+        out.println("<th>Person ID</th>");
+        out.println("<th>First Name</th>");
+        out.println("<th>Last Name</th>");
+        out.println("<th>Pay (K)</th>");
+		out.println("<th>Person Type</th>");
+        out.println("</tr>");
+		
+		//exec query
        	try 
 		{ 
 			result=state4.executeQuery(query1);
@@ -74,24 +121,17 @@ public class person_upd extends HttpServlet
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
-		out.println("<center><table border=\"1\">"); 
-		out.println("<tr BGCOLOR=\"#cccccc\">");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person ID</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">First Name</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Last Name</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Pay (K)</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Person Type</td>");
-        out.println("</tr>");
+		//get table data from query executed
 		try 
 		{ 
             while(result.next()) 
 			{ 
 		    	out.println("<tr>");
-                out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
-		    	out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(3)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(4)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(5)+"</td>");
+                out.println("     <td>"+result.getString(1)+"</td>");
+		    	out.println("     <td>"+result.getString(2)+"</td>");
+				out.println("     <td>"+result.getString(3)+"</td>");
+				out.println("     <td>"+result.getString(4)+"</td>");
+				out.println("     <td>"+result.getString(5)+"</td>");
                 out.println("</tr>");
 			} 
 	    }
@@ -101,6 +141,8 @@ public class person_upd extends HttpServlet
 		}
 
 		out.println("</table></CENTER>");
+
+		// close connection
 		try 
 		{ 
    			result.close(); 
@@ -113,6 +155,8 @@ public class person_upd extends HttpServlet
 			e.printStackTrace();	
 		}
 
-  		out.println("</body></html>");
+  		//finish html document
+		out.println("<center><br/><br/><p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p></section>");
+		out.println("</body></html>");
     } 
 }

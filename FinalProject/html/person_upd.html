@@ -13,6 +13,7 @@
 	<section>     
 	<head>
 		<div style="float: right;">
+			<!-- redirect to other pages -->
 			<p><a href="\FinalProject\index.html">
 				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button  id="search" onclick="document.location='/FinalProject/personJdbc'" title="Search Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -26,24 +27,29 @@
 	</head>  
 
 		<form method = "get" action = "/FinalProject/person_upd">
+			<!-- person ID, limited to only number inputs -->
 			<p>Person ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="PersonID" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="PersonID"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
+			<!--first name, any string characters -->
 				First Name:&nbsp;&nbsp;&nbsp;
 				<input id="numInput" type = "text" name = "FirstName" size="21">&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!--last name, any string characters -->
 				Last Name:&nbsp;&nbsp;&nbsp;
 				<input id="numInput" type = "text" name = "LastName" size="21">&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!-- payk, limited to only number inputs -->
 				Pay (K):&nbsp;&nbsp;&nbsp;
-				<input id="numInput" type="number" min="1" name="PayK" placeholder="1"/>
+				<input id="numInput" type="number" min="1" name="PayK"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
 
+			<!-- person type, limited to only actor, actress, director, producer, writer-->
 				PersonType:&nbsp;&nbsp;&nbsp;
 				<select id="dropDown" size = "Actor" name = "PersonType">
 					<option value = "Actor">Actor</option>
@@ -55,6 +61,7 @@
 			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
 			</p>

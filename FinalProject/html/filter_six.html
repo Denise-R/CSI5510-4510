@@ -13,6 +13,7 @@
 	<section>     
 	<head>
 		<div style="float: right;">
+			<!-- redirect to other pages -->
 			<p><a href="\FinalProject\index.html">
 				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="filter" onclick="document.location='filter_reg.html'" title="Filters"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -28,10 +29,12 @@
 	<br/>
 		<form method = "get" action = "/FinalProject/filter_six">
 
+			<!-- movie ID, limited to only number inputs -->
                 Movie ID:<font color = "#FF0000">*&nbsp;</font>
 				<input id="numInput" type="number" min="1" name="MovieID" placeholder="1"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<!-- crew type, limited to only actor, actress -->
 				Crew Type:<font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Actor" name = "PersonType">
 					<option value = "Actor">Actor</option>
@@ -41,6 +44,7 @@
 
 				<br/><br/><br/>
                 <div class="filter-button-container">
+				<!-- submit form and reset values -->
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
                 </div>
