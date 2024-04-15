@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Switch Registration/Login Interface</title>
+    <link rel="stylesheet" href="CSS/login.css">
+</head>
+<body>
+<div class="container">
+    <div class="from-box">
+        <!-- Register -->
+        <div class="register-box hidden">
+            <h1>register</h1>
+            <input type="text" placeholder="Username">
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Confirm Password">
+            <button onclick="document.location='cast_reg.html'" >Register</button>
+        </div>
+        <!-- Login -->
+        <div class="login-box">
+            <h1>login</h1>
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button onclick="document.location='cast_reg.html'">Login</button>
+        </div>
+    </div>
+    <div class="con-box left">
+        <h2>Welcome to <span>Movie Portal</span></h2>
+        <p>Grab your tickets and enjoy the magic of <span>movies</span> now</p>
+        <img src="CSS/Images/5.png" alt="">
+        <p>Already have an account?</p>
+        <button id="login">Go to Login</button>
+    </div>
+    <div class="con-box right">
+        <h2>Welcome to <span>Movie Portal</span></h2>
+        <p>Grab your tickets and enjoy the magic of <span>movies</span> now</p>
+        <img src="CSS/Images/6.png" alt="">
+        <p>Don't have an account?</p>
+        <button id="register">Go to Register</button>
+    </div>
+</div>
+<script>
+    // Elements to operate on
+    let login = document.getElementById("login");
+    let register = document.getElementById("register");
+    let form_box = document.getElementsByClassName("from-box")[0];
+    let register_box = document.getElementsByClassName("register-box")[0];
+    let login_box = document.getElementsByClassName("login-box")[0];
+    // Click event for the 'Go to Register' button
+    register.addEventListener('click',()=>{
+        form_box.style.transform='translateX(80%)';
+        login_box.classList.add('hidden');
+        register_box.classList.remove('hidden');
+    })
+    // Click event for the 'Go to Login' button
+    login.addEventListener('click',()=>{
+        form_box.style.transform='translateX(0%)';
+        register_box.classList.add('hidden');
+        login_box.classList.remove('hidden');
+    })
+</script>
+</body>
+</html>

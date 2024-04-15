@@ -70,7 +70,7 @@ public class movieJdbc extends HttpServlet
 		//write to html
 		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
 		out.println("<head><div style=\"float: right;\">");
-		out.println("<p><a href=\"\\FinalProject\\index.html\">");
+		out.println("<p><a href=\"\\FinalProject\\html\\main_page.html\">");
 		out.println("<img border=\"0\" src=\"\\FinalProject\\html\\CSS\\Images\\homeIcon.png\" width=\"30\" height=\"30\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 		out.println("</p></div><h2 id=\"pageTitle\">Movie Table</h2></head>");
 		out.println("<center><table>"); 
