@@ -3,7 +3,7 @@
     <head>
 		<meta charset="utf-8">
 		<title>FinalProject</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
 		<link rel="stylesheet" href="CSS/base.css" />
     </head>
@@ -11,11 +11,11 @@
 	<body>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<section>     
-	<head>
+	<header>
 		<div style="float: right;">
 			<!-- redirect to other pages -->
-			<p><a href="main_page.html">
-				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<p>
+            <button  id="home" onclick="document.location='main_page.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="mTable" onclick="document.location='/FinalProject/movieJdbc'" title="Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="pTable" onclick="document.location='/FinalProject/personJdbc'" title="Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="castTable" onclick="document.location='/FinalProject/castJdbc'" title="Cast"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -24,7 +24,7 @@
 			</p>
 		</div>
 		<h2 id="pageTitle">Choose What You Want to Filter</h2>
-	    </head>  
+	    </header>  
 				<!-- first row of filter buttons -->
         <div class="filter-container">
 		<a href="filter_one.html">
@@ -66,9 +66,9 @@
         </a>
         </div>
 	
-		<center>
-			<br/><br/>
-		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		<footer>
+            <p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+        </footer> 
 	</section>    
 
 
