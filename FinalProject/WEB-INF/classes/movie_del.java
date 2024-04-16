@@ -11,7 +11,7 @@ public class movie_del extends HttpServlet
 		 // declare variables  
 			Statement state4 = null;
 			ResultSet result = null;
-			ResultSet alertResult = null;       
+			ResultSet alertResult = null;        
 
 			String query1="";        
 			String query2="";        
@@ -19,12 +19,11 @@ public class movie_del extends HttpServlet
 			String query4="";        
 			String query5="";        
 			Connection con=null; 
-			String alertQuery="";  
+			String alertQuery="";   
 
           
 			//get paramenters	
             String m_id = (request.getParameter("MovieID").toString());
-			String m_title = request.getParameter("Title");
 
 		try
 		{		
@@ -61,24 +60,55 @@ public class movie_del extends HttpServlet
   			e.printStackTrace();
 		}
 		
-		// alert query to notify that person has been deleted
+		// alert query to notify that movie has been deleted
 		try 
 		{ 
+			// check if movie id is valid
 			alertQuery="SELECT title FROM movie where movieID = '" + m_id + "'";
 			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
 			alertResult = pstmt1.executeQuery();
 
+			// displaying alert if movie id is not valid
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The movie you tried to delete does not exist. Check to make sure the movie ID you entered is the one you intended.\");}</script>");
+			}
+			else
+			{
+				// exec queries to delete movie
+				try{
+					// creating alert that movie was deleted
+					String title = alertResult.getString("title");
+					out.println("<script>function showAlertOnLoad() {alert(\"You have deleted the movie " + title + "\");}</script>");
+					try 
+					{ 
+						// building and executing delete queries
+						query1 = "delete from cast where MovieID = '" + m_id + "'";
+						query2 = "delete from crew where MovieID = '" + m_id + "'";
+						query3 = "delete from showtimes where MovieID = '" + m_id + "'";
+						query4 = "delete from movie where MovieID = '" + m_id + "'";
+						result=state4.executeQuery(query1);
+						result=state4.executeQuery(query2);
+						result=state4.executeQuery(query3);
+						result=state4.executeQuery(query4);
+							
+					}
+					catch (SQLException e) 
+					{
+						System.err.println("SQLException while executing SQL Statement."); 
+					}
+				}
+				catch (SQLException e) 
+				{
+					System.err.println("SQLException while executing SQL Statement."); 
+				}
+			}
 	  	}
 		catch (SQLException e) 
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
 
-		// build query
-		query1 = "delete from cast where MovieID = '" + m_id + "'";
-		query2 = "delete from crew where MovieID = '" + m_id + "'";
-		query3 = "delete from showtimes where MovieID = '" + m_id + "'";
-		query4 = "delete from movie where MovieID = '" + m_id + "' and Title = '" + m_title + "'";
+		// creating table query
 		query5 = "SELECT MovieID, Title, ReleaseDate, Synopsis, Rating, LengthMin, Category, CostMil, ScreeningType FROM movie order by MovieID";
 		
 		//write to html file
@@ -101,13 +131,9 @@ public class movie_del extends HttpServlet
 		}
 
 
-		//exec query
+		//exec table query
        	try 
 		{ 
-			result=state4.executeQuery(query1);
-			result=state4.executeQuery(query2);
-			result=state4.executeQuery(query3);
-			result=state4.executeQuery(query4);
 			result=state4.executeQuery(query5);
 				
 	  	}

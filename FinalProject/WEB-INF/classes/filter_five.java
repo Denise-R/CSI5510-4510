@@ -12,7 +12,9 @@ public class filter_five extends HttpServlet
 			Statement state4 = null;
 			ResultSet result = null;
 			String query="";        
-			Connection con=null; 
+			Connection con=null;  
+			ResultSet alertResult = null;     
+			String alertQuery=""; 
           
 			// get parameters
             String crew_type = request.getParameter("CrewType");
@@ -54,6 +56,31 @@ public class filter_five extends HttpServlet
 		{
   			e.printStackTrace();
 		}
+
+
+		try{
+			// checking if person id is valid
+			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "' and personType in ('Director', 'Producer', 'Writer')";
+			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
+			alertResult = pstmt1.executeQuery();
+
+			// checking if p_type has been entered
+			if(crew_type == "<Select>"){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a crew type.\");}</script>");
+			}
+			if(cast_type == "<Select>"){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a cast type.\");}</script>");
+			}
+			// checking if person exists
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered either does not exist or does not belong to a crew member. Please reference the Person table.\");}</script>");
+			}
+		}
+		catch (SQLException e) 
+		{
+			System.err.println("SQLException while executing SQL Statement."); 
+		}
+
 		
 		// build query
 		query = "SELECT PERSON.PersonID, PERSON.FirstName, PERSON.LastName, PERSON.PayK, PERSON.PersonType FROM PERSON WHERE PERSON.PersonID NOT IN (SELECT  p.PersonID FROM MOVIE m, PERSON p, CAST c WHERE m.MovieID = c.MovieID AND p.personID = c.personID" +

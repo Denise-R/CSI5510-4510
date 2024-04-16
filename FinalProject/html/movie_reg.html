@@ -25,7 +25,8 @@
 		</div>
 		<h2 id="pageTitle">Add Movie</h2>
 	</head>  
-	<br/>
+	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
+
 		<form method = "get" action = "/FinalProject/movie_reg">
 			<!--movie title, any string characters -->
 			<p>Movie Title: <font color = "#FF0000">*&nbsp;</font>
@@ -46,6 +47,7 @@
 				<!-- rating, limited by drop down options -->
 				Rating: <font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "1" name = "Rating">
+				<option value = "<Select>">Select</option>
 				<option value = "G">G</option>
 				<option value = "R">R</option>
 				<option value = "PG">PG</option>
@@ -62,6 +64,7 @@
 				<!-- category, limited by drop down options -->
 				Category: <font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Action" name = "Category">
+					<option value = "<Select>">Select</option>
 					<option value = "Action">Action</option>
 					<option value = "Animation">Animation</option>
 					<option value = "Comedy">Comedy</option>
@@ -84,6 +87,7 @@
 				<!-- screening type, limited to comming soon or showing -->
 				Screening Type: <font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Coming Soon" name = "ScreeningType">
+					<option value = "<Select>">Select</option>
 					<option value = "Coming Soon">Coming Soon</option>
 					<option value = "Showing">Showing</option>
 				</select>
@@ -96,10 +100,9 @@
 			</p>
 		</form>
 
-		
+		<br/>
 	
 		<center>
-			<br/>
 		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
 	</section>     
 

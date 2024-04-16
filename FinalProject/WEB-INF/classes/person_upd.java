@@ -59,22 +59,53 @@ public class person_upd extends HttpServlet
   			e.printStackTrace();
 		}	
 		
-		// alert query to notify that person has been deleted
+		// alert query to notify that person has been updated
 		try 
 		{ 
+			// creating alert queries
 			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
 			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
 			alertResult = pstmt1.executeQuery();
 
+			// checking if p_type has been entered
+			if(p_type == "<Select>"){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a person type.\");}</script>");
+			}
+			// checking if person exists
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered is not valid. Please reference the Person table.\");}</script>");
+			}
+			else{
+				try{
+					// creating alert query that person was updated
+					String fname = alertResult.getString("FirstName");
+					String lname = alertResult.getString("LastName");
+					out.println("<script>function showAlertOnLoad() {alert(\"You have updated the person " + fname + " " + lname + "\");}</script>");
+					try 
+					{ 
+						// building and exec update query
+						query1 = " update person set LastName = '"+p_lname+"', FirstName = '"+p_fname+"', PayK = '"+p_pay+"', PersonType = '"+p_type+"' where personID = '"+p_id+"'";			
+						result=state4.executeQuery(query1);
+					}
+					catch (SQLException e) 
+					{
+						System.err.println("SQLException while executing SQL Statement."); 
+					}
+				}
+				catch (SQLException e) 
+				{
+					System.err.println("SQLException while executing SQL Statement."); 
+				}
+			}
+
 	  	}
+		
 		catch (SQLException e) 
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
 		
-		// build query
-		query1 = " update person set LastName = '"+p_lname+"', FirstName = '"+p_fname+"', PayK = '"+p_pay+"', PersonType = '"+p_type+"' where personID = '"+p_id+"'";			
-
+		
 		query2 = "SELECT PersonID, FirstName,  LastName, PayK, PersonType FROM person order by PersonID";
 
 		//write to html file
@@ -83,19 +114,7 @@ public class person_upd extends HttpServlet
 		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
 		
-		//exec query
-		try{
-			while (alertResult.next()) {
-			
-				String fname = alertResult.getString("FirstName");
-				String lname = alertResult.getString("LastName");
-				out.println("<script>function showAlertOnLoad() {alert(\"You have updated the person " + fname + " " + lname + "\");}</script>");
-			}
-		}
-		catch (SQLException e) 
-		{
-			System.err.println("SQLException while executing SQL Statement."); 
-		}
+
 		//write to html
 		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
 		out.println("<head><div style=\"float: right;\">");
@@ -111,10 +130,9 @@ public class person_upd extends HttpServlet
 		out.println("<th>Person Type</th>");
         out.println("</tr>");
 		
-		//exec query
+		//exec table query
        	try 
 		{ 
-			result=state4.executeQuery(query1);
 			result=state4.executeQuery(query2);
 	  	}
 		catch (SQLException e) 

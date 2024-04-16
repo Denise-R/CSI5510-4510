@@ -24,7 +24,8 @@
 		</div>
 		<h2 id="pageTitle">Add Person</h2>
 	</head>  
-	<br/>
+	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
+
 		<form method = "get" action = "/FinalProject/person_reg">
 			<!--first name, any string characters -->
 			<p><p>First Name: <font color = "#FF0000">*&nbsp;</font>
@@ -44,6 +45,7 @@
 			<!-- person type, limited to only actor, actree, director, producer, writer -->
 				PersonType: <font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Actor" name = "PersonType">
+					<option value = "<Select>">Select</option>
 					<option value = "Actor">Actor</option>
 					<option value = "Actress">Actress</option>
 					<option value = "Director">Director</option>

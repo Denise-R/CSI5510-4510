@@ -31,7 +31,7 @@ public class showtimes_del extends HttpServlet
      	}
         catch(SQLException e)
 		{	
-			System.out.println("Error: "+e);	
+			System.out.println("Error: "+ e);	
 		}
 		catch(Exception e) 
 		{
@@ -59,32 +59,47 @@ public class showtimes_del extends HttpServlet
 		// alert query to notify that person has been deleted
 		try 
 		{ 
+			//alert to check if showtime id is valid
 			alertQuery="select title FROM MOVIE m, SHOWTIMES s where m.movieID = s.MovieID and s.ShowtimeID = '" + show_id + "'";
 			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
 			alertResult = pstmt1.executeQuery();
 
-	  	}
-		catch (SQLException e) 
-		{
-			System.err.println("SQLException while executing SQL Statement."); 
-		}
+			// displaying alert if showtime id is not valid
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The showtime you tried to delete does not exist. Check to make sure the showtime ID you entered is the one you intended.\");}</script>");
 
-		//exec query
-		try{
-			while (alertResult.next()) {
-			
-				String title = alertResult.getString("title");
-				out.println("<script>function showAlertOnLoad() {alert(\"You have deleted one showtime for the movie " + title + " \");}</script>");
 			}
+			else{
+				//exec query to delete showtime
+				try{
+					String title = alertResult.getString("title");
+					out.println("<script>function showAlertOnLoad() {alert(\"You have deleted one showtime for the movie " + title + " \");}</script>");
+					//exec query
+					try 
+					{ 
+						// build query for delete alert
+						query1 = "delete from SHOWTIMES where ShowtimeID = '" + show_id + "'";
+						result=state4.executeQuery(query1);
+					}
+					catch (SQLException e) 
+					{
+						System.err.println("SQLException while executing SQL Statement."); 
+					}
+				}
+				catch (SQLException e) 
+				{
+					System.err.println("SQLException while executing SQL Statement."); 
+				}
+			}
+			// creating table query
+			query2 = "select s.ShowtimeID, s.TheaterName, s.MovieID, m.title, s.ScreenID, s.Showtime, m.LengthMin FROM MOVIE m, SHOWTIMES s where m.movieID = s.MovieID order by s.ShowtimeID";
+				
 		}
 		catch (SQLException e) 
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
 
-		// build query
-		query1 = "delete from SHOWTIMES where ShowtimeID = '" + show_id + "'";
-		query2 = "select s.ShowtimeID, s.TheaterName, s.MovieID, m.title, s.ScreenID, s.Showtime, m.LengthMin FROM MOVIE m, SHOWTIMES s where m.movieID = s.MovieID order by s.ShowtimeID";
 		
 		//write to html file
 		out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>FinalProject</title>");
@@ -92,10 +107,9 @@ public class showtimes_del extends HttpServlet
 		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
        	
-		//exec query
+		//exec table query
        	try 
 		{ 
-			result=state4.executeQuery(query1);
 			result=state4.executeQuery(query2);
 				
 	  	}

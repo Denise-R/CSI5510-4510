@@ -26,12 +26,13 @@
 		</div>
 		<h2 id="pageTitle">Filter Movies by Crew Member</h2>
 	</head>  
-	<br/>
+	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
 		<form method ="get" action="/FinalProject/filter_one">
 
 			<!-- crew type, limited to only director, producer, writer -->
 		    	Crew Type:<font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Director" name = "PersonType">
+					<option value = "<Select>">Select</option>
 					<option value="Director">Director</option>
 					<option value="Producer">Producer</option>
                     <option value="Writer">Writer</option>

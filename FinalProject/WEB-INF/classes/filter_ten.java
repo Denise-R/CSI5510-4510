@@ -12,7 +12,9 @@ public class filter_ten extends HttpServlet
 			Statement state4 = null;
 			ResultSet result = null;
 			String query="";        
-			Connection con=null; 
+			Connection con=null;    
+			ResultSet alertResult = null;     
+			String alertQuery="";  
           
 			// get parameters
             String p_id = (request.getParameter("PersonID")).toString();
@@ -50,6 +52,24 @@ public class filter_ten extends HttpServlet
 		catch (IOException e) 
 		{
   			e.printStackTrace();
+		}
+
+
+		try{
+			// checking if person id is valid
+			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
+			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
+			alertResult = pstmt1.executeQuery();
+
+			
+			// checking if person exists
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered is not valid. Please reference the Person table.\");}</script>");
+			}
+		}
+		catch (SQLException e) 
+		{
+			System.err.println("SQLException while executing SQL Statement."); 
 		}
 		
 		// build query

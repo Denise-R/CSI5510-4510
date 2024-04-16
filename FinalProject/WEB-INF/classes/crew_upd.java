@@ -12,9 +12,13 @@ public class crew_upd extends HttpServlet
 			Statement state4 = null;
 			ResultSet result = null;
 			ResultSet alertResult = null;        
+			ResultSet alertResult2 = null;        
+			ResultSet alertResult3 = null;        
 			String query1="";        
 			String query2="";        
 			String alertQuery="";   
+			String alertQuery2="";   
+			String alertQuery3="";   
 			Connection con=null; 
           
 			// get parameters
@@ -58,12 +62,57 @@ public class crew_upd extends HttpServlet
   			e.printStackTrace();
 		}
 
-		// alert query
+		// alert query to notify that crew has been deleted
 		try 
 		{ 
+			//Queries to check if user entries are valid
 			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
+			alertQuery2="SELECT Contribution FROM crew where CrewID = '" + c_id + "'";
+			alertQuery3="SELECT title from movie where movieID = '" + m_id + "'";
 			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
 			alertResult = pstmt1.executeQuery();
+			PreparedStatement pstmt2 = con.prepareStatement(alertQuery2);
+			alertResult2 = pstmt2.executeQuery();
+			PreparedStatement pstmt3 = con.prepareStatement(alertQuery3);
+			alertResult3 = pstmt3.executeQuery();
+
+			// Checking if person_id is valid
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered is not valid.\");}</script>");
+			}
+			// Checking if crew_id is valid
+			else if(!alertResult2.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The crew ID you entered is not valid.\");}</script>");
+			}
+			// Checking if movie_id is valid
+			else if(!alertResult3.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The movie ID you entered is not valid.\");}</script>");
+			}
+			else
+			{
+				//exec query to delete
+				try{
+					// creating delete alert
+					String fname = alertResult.getString("FirstName");
+					String lname = alertResult.getString("LastName");
+					out.println("<script>function showAlertOnLoad() {alert(\"You have updated one record for the crew member " + fname + " " + lname + "\");}</script>");
+					try 
+					{ 
+						// build query
+						query1 = "update  crew set Contribution = '"+c_contr+"' where CrewID = '"+c_id+"' and PersonID = '"+p_id+"' and MovieID = '"+m_id+"'";
+						result=state4.executeQuery(query1);
+							
+					}
+					catch (SQLException e) 
+					{
+						System.err.println("SQLException while executing SQL Statement."); 
+					}
+				}
+				catch (SQLException e) 
+				{
+					System.err.println("SQLException while executing SQL Statement."); 
+				}
+			}
 
 	  	}
 		catch (SQLException e) 
@@ -71,9 +120,10 @@ public class crew_upd extends HttpServlet
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
 
+
+
 		// build query
 		
-		query1 = "update  crew set Contribution = '"+c_contr+"' where CrewID = '"+c_id+"' and PersonID = '"+p_id+"' and MovieID = '"+m_id+"'";
 		query2 = "select c.CrewID, m.MovieID, m.title, p.PersonID,  p.FirstName, p.LastName, c.Contribution, p.PayK, p.PersonType FROM MOVIE m, PERSON p, CREW c WHERE m.MovieID = c.MovieID AND p.personID = c.personID order by c.CrewID";
 		
 		//write to html file
@@ -81,21 +131,7 @@ public class crew_upd extends HttpServlet
 		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
 		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
-		
-
-		//exec query
-		try{
-			while (alertResult.next()) {
-			
-				String fname = alertResult.getString("FirstName");
-				String lname = alertResult.getString("LastName");
-				out.println("<script>function showAlertOnLoad() {alert(\"You have updated one record for the crew member " + fname + " " + lname + "\");}</script>");
-			}
-		}
-		catch (SQLException e) 
-		{
-			System.err.println("SQLException while executing SQL Statement."); 
-		}
+	
 		//write to html
 		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
 		out.println("<head><div style=\"float: right;\">");
@@ -118,7 +154,6 @@ public class crew_upd extends HttpServlet
 		//exec query
        	try 
 		{ 
-			result=state4.executeQuery(query1);
 			result=state4.executeQuery(query2);
 	  	}
 		catch (SQLException e) 

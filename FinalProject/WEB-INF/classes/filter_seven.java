@@ -12,7 +12,9 @@ public class filter_seven extends HttpServlet
 			Statement state4 = null;
 			ResultSet result = null;
 			String query="";        
-			Connection con=null; 
+			Connection con=null;    
+			ResultSet alertResult = null;     
+			String alertQuery="";
           
 			// get parameters
             String m_id = (request.getParameter("MovieID")).toString();
@@ -52,6 +54,24 @@ public class filter_seven extends HttpServlet
   			e.printStackTrace();
 		}
 		
+		try{
+			// checking if person id is valid
+			alertQuery="SELECT title FROM movie where MovieID = '" + m_id + "'";
+			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
+			alertResult = pstmt1.executeQuery();
+
+		
+			// checking if movie exists
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The movie ID you entered is not valid. Please reference the Movie table.\");}</script>");
+			}
+		}
+		catch (SQLException e) 
+		{
+			System.err.println("SQLException while executing SQL Statement."); 
+		}
+
+
 		// build query
 		query = "select m.MovieID, m.title, p.PersonID, p.FirstName, p.LastName, p.personType FROM MOVIE m, PERSON p, CAST c WHERE m.MovieID = c.MovieID AND p.personID = c.personID AND m.movieID = '" + m_id + "'";
 		

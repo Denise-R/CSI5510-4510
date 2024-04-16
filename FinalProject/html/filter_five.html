@@ -26,12 +26,14 @@
 		</div>
 		<h2 id="pageTitle">Filter Cast Members That Do not Work With Crew Members</h2>
 	</head>  
-	<br/>
+	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
+	
 		<form method = "get" action = "/FinalProject/filter_five">
 				<br/>
 			<!-- crew type, limited to only director, producer, writer -->
                 Crew Type:<font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Director" name = "CrewType">
+					<option value = "<Select>">Select</option>
 					<option value="Director">Director</option>
 					<option value="Producer">Producer</option>
                     <option value="Writer">Writer</option>
@@ -46,6 +48,7 @@
 			<!-- cast type, limited to only Actor or actress -->
 				Cast Type:<font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Actor" name = "CastType">
+					<option value = "<Select>">Select</option>
 					<option value = "Actor">Actor</option>
 					<option value = "Actress">Actress</option>
 				</select>
@@ -60,7 +63,7 @@
 			</p>
 		</form>
 
-		<br/><br/><br/><br/><br/><br/>
+		<br/><br/><br/><br/><br/>
 	
 		<center/>
 			<br/><br/>

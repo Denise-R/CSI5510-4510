@@ -61,9 +61,46 @@ public class person_del extends HttpServlet
 		// alert query to notify that person has been deleted
 		try 
 		{ 
+			// checking if person id is valid
 			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
 			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
 			alertResult = pstmt1.executeQuery();
+
+			// displaying alert if person id is not valid
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person you tried to delete does not exist. Check to make sure the person ID you entered is the one you intended.\");}</script>");
+			}
+			else{
+				//exec query to delete person
+				try{
+					// creating alert that person was deleted
+					String fname = alertResult.getString("FirstName");
+					String lname = alertResult.getString("LastName");
+					out.println("<script>function showAlertOnLoad() {alert(\"You have deleted the person " + fname + " " + lname + "\");}</script>");
+					//exec query
+					try 
+					{ 
+						// building and executing delete queries
+						query1 = "delete from crew where PersonID = '" + p_id + "'";
+						query2 = "delete from cast where PersonID = '" + p_id + "'";
+						query3 = "delete from person where PersonID = '" + p_id + "'";
+						result=state4.executeQuery(query1);
+						result=state4.executeQuery(query2);
+						result=state4.executeQuery(query3);
+							
+					}
+					catch (SQLException e) 
+					{
+						System.err.println("SQLException while executing SQL Statement."); 
+					}
+				}
+				catch (SQLException e) 
+				{
+					System.err.println("SQLException while executing SQL Statement."); 
+				}
+			}
+			// creating table query
+			query4 = "SELECT PersonID, FirstName,  LastName, PayK, PersonType FROM person order by PersonID";
 
 	  	}
 		catch (SQLException e) 
@@ -71,13 +108,6 @@ public class person_del extends HttpServlet
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
 
-		// build query
-		query1 = "delete from crew where PersonID = '" + p_id + "'";
-		query2 = "delete from cast where PersonID = '" + p_id + "'";
-		query3 = "delete from person where PersonID = '" + p_id + "'";
-
-		query4 = "SELECT PersonID, FirstName,  LastName, PayK, PersonType FROM person order by PersonID";
-		
 
 		//write to html file
 		out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>FinalProject</title>");
@@ -85,19 +115,6 @@ public class person_del extends HttpServlet
 		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
 		
-		//exec query
-		try{
-			while (alertResult.next()) {
-			
-				String fname = alertResult.getString("FirstName");
-				String lname = alertResult.getString("LastName");
-				out.println("<script>function showAlertOnLoad() {alert(\"You have deleted the person " + fname + " " + lname + "\");}</script>");
-			}
-		}
-		catch (SQLException e) 
-		{
-			System.err.println("SQLException while executing SQL Statement."); 
-		}
 		//write to html
 		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
 		out.println("<head><div style=\"float: right;\">");
@@ -113,12 +130,9 @@ public class person_del extends HttpServlet
 		out.println("<th>Person Type</th>");
         out.println("</tr>");
 		
-		//exec query
+		//exec table query
        	try 
 		{ 
-			result=state4.executeQuery(query1);
-			result=state4.executeQuery(query2);
-			result=state4.executeQuery(query3);
 			result=state4.executeQuery(query4);
 	  	}
 		catch (SQLException e) 

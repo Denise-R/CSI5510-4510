@@ -12,9 +12,13 @@ public class cast_upd extends HttpServlet
 			Statement state4 = null;
 			ResultSet result = null;
 			ResultSet alertResult = null;      
+			ResultSet alertResult2 = null;      
+			ResultSet alertResult3 = null;      
 			String query1="";        
 			String query2="";        
 			String alertQuery="";  
+			String alertQuery2="";  
+			String alertQuery3="";  
 			Connection con=null; 
           
 			// get parameters
@@ -59,21 +63,67 @@ public class cast_upd extends HttpServlet
   			e.printStackTrace();
 		}
 		
-		// alert query 
+		// alert query to notify that person has been deleted
 		try 
 		{ 
+			//Queries to check if user entries are valid
 			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
+			alertQuery2="SELECT CharName FROM cast where CastID = '" + c_id + "'";
+			alertQuery3="SELECT title from movie where movieID = '" + m_id + "'";
 			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
 			alertResult = pstmt1.executeQuery();
+			PreparedStatement pstmt2 = con.prepareStatement(alertQuery2);
+			alertResult2 = pstmt2.executeQuery();
+			PreparedStatement pstmt3 = con.prepareStatement(alertQuery3);
+			alertResult3 = pstmt3.executeQuery();
 
+			// Checking if person_id is valid
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered is not valid.\");}</script>");
+			}
+			// Checking if cast_id is valid
+			else if(!alertResult2.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The cast ID you entered is not valid.\");}</script>");
+			}
+			// Checking if movieID is valid
+			else if(!alertResult3.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The movie ID you entered is not valid.\");}</script>");
+			}
+			else
+			{
+				//exec query to update
+				try{
+					// creating update alert
+					String fname = alertResult.getString("FirstName");
+					String lname = alertResult.getString("LastName");
+					out.println("<script>function showAlertOnLoad() {alert(\"You have updated one record for the cast member " + fname + " " + lname + " \");}</script>");
+
+					try 
+					{ 
+						// build update query
+						query1 = "update  cast set CharName = '"+char_name+"' where CastID = '"+c_id+"' and MovieID = '"+m_id+"' and PersonID = '"+p_id+"'";
+						result=state4.executeQuery(query1);
+							
+					}
+					catch (SQLException e) 
+					{
+						System.err.println("SQLException while executing SQL Statement."); 
+					}
+				}
+				catch (SQLException e) 
+				{
+					System.err.println("SQLException while executing SQL Statement."); 
+				}
+			}
+		
 	  	}
 		catch (SQLException e) 
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
+
 		
 		// build query
-		query1 = "update  cast set CharName = '"+char_name+"' where CastID = '"+c_id+"' and MovieID = '"+m_id+"' and PersonID = '"+p_id+"'";
 		
 		query2 = "select c.CastID, m.MovieID, m.title, p.PersonID, p.FirstName, p.LastName,  c.CharName, p.PayK, p.PersonType FROM MOVIE m, PERSON p, CAST c WHERE m.MovieID = c.MovieID AND p.personID = c.personID order by c.CastID";
 		
@@ -83,20 +133,6 @@ public class cast_upd extends HttpServlet
 		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
 		
-		//exec query
-		try{
-			while (alertResult.next()) {
-
-				String fname = alertResult.getString("FirstName");
-				String lname = alertResult.getString("LastName");
-				out.println("<script>function showAlertOnLoad() {alert(\"You have updated one record for the cast member " + fname + " " + lname + " \");}</script>");
-
-			}
-		}
-		catch (SQLException e) 
-		{
-			System.err.println("SQLException while executing SQL Statement."); 
-		}
 
 		//write to html
 		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
@@ -117,10 +153,9 @@ public class cast_upd extends HttpServlet
 		out.println("<th>Person Type</th>");
         out.println("</tr>");
 		
-		//exec query
+		//exec table query
        	try 
 		{ 
-			result=state4.executeQuery(query1);
 			result=state4.executeQuery(query2);
 	  	}
 		catch (SQLException e) 

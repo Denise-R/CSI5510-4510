@@ -11,7 +11,10 @@ public class filter_two extends HttpServlet
 		// declare variables	
 		Statement state4 = null;
 			ResultSet result = null;
-			String query="";        
+			String query="";   
+			ResultSet alertResult = null;     
+			String alertQuery="";  
+
 			Connection con=null; 
           
 			// get parameters
@@ -53,6 +56,28 @@ public class filter_two extends HttpServlet
   			e.printStackTrace();
 		}
 		
+		try{
+			// checking if person id is valid
+			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
+			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
+			alertResult = pstmt1.executeQuery();
+
+			// checking if p_type has been entered
+			if(p_type == "<Select>"){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a cast type.\");}</script>");
+			}
+			// checking if person exists
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered is not valid. Please reference the Person table.\");}</script>");
+			}
+		}
+		catch (SQLException e) 
+		{
+			System.err.println("SQLException while executing SQL Statement."); 
+		}
+
+
+
 		// build query
 		query = "SELECT m.MovieID, m.Title, m.ReleaseDate, m.Rating, m.LengthMin, m.Category, m.CostMil, p.FirstName, p.LastName, p.PayK, c.CharName FROM MOVIE m, PERSON p, cast c WHERE m.MovieID = c.MovieID AND p.personID = c.personID AND p.PersonID = '" + p_id + "' AND p.PersonType = '" + p_type + "' Order by m.MovieID";
 		

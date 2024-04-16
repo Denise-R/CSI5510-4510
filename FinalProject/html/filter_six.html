@@ -26,7 +26,8 @@
 		</div>
 		<h2 id="pageTitle">Filter Max Pay Earned From A Movie</h2>
 	</head>  
-	<br/>
+	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
+
 		<form method = "get" action = "/FinalProject/filter_six">
 
 			<!-- movie ID, limited to only number inputs -->
@@ -37,6 +38,7 @@
 			<!-- crew type, limited to only actor, actress -->
 				Crew Type:<font color = "#FF0000">*&nbsp;</font>
 				<select id="dropDown" size = "Actor" name = "PersonType">
+					<option value = "<Select>">Select</option>
 					<option value = "Actor">Actor</option>
 					<option value = "Actress">Actress</option>
 				</select>
