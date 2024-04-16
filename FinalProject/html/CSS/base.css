@@ -235,7 +235,7 @@ transition-duration: 0.4s;
 cursor: pointer;
 height: 30px;
 width: 30px;
-background: url('Images/showtimeIcon.png');
+background: url('Images/showtimeIcon.png') no-repeat;
 background-repeat: 3px 5px no-repeat;
 }
 
@@ -244,7 +244,8 @@ background-repeat: 3px 5px no-repeat;
   padding: 0;
 }
 
-#numInput{
+/* changed from an ID to a Class as it is used multiple times - eeh 4/16/24 */
+.numInput{
   height: 25px;
   width: 200px;
   cursor: pointer;
@@ -256,8 +257,20 @@ background-repeat: 3px 5px no-repeat;
   cursor: pointer;
 }
 
-#dropDown{
+/* Changed to a class as it is used multiple times - eeh 4/16/24 */
+.dropDown{
 height: 30px;
 width: 200px;
 cursor: pointer;
+}
+
+/* footer section with author's names, etc eeh, 4/16/24*/
+footer {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Created a class for the * font color to be in the CSS and not in the HTML - eeh 4/16/24 */
+.star {
+  color: #FF0000; /* red */
 }

@@ -177,3 +177,11 @@ input:focus::placeholder{
   background-color: #a262ad;
   color: #f6f6f6;
 }
+
+/* For fine print on login page - eeh 4/16/24 */
+.fineprint {
+  font-size: .75em;
+  font-weight: bold;
+  color: #FFFFFF; /* white */
+  text-align: center;
+}
