@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
 		<meta charset="utf-8">
-		<title>FinalProject</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<title>Filter Movie by Crew Member - FinalProject</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
 		<link rel="stylesheet" href="CSS/base.css" />
     </head>
@@ -11,11 +10,11 @@
 	<body>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<section>     
-	<head>
+	<header>
 		<div style="float: right;">
 			<!-- redirect to other pages -->
-			<p><a href="main_page.html">
-				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<p>
+			<button  id="home" onclick="document.location='main_page.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="filter" onclick="document.location='filter_reg.html'" title="Filters"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="mTable" onclick="document.location='/FinalProject/movieJdbc'" title="Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="pTable" onclick="document.location='/FinalProject/personJdbc'" title="Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -25,14 +24,15 @@
 			</p>
 		</div>
 		<h2 id="pageTitle">Filter Movies by Crew Member</h2>
-	</head>  
-	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
+	</header>  
+	<p> <span class="star">*&nbsp; Required Entry</span></p>
+	
 		<form method ="get" action="/FinalProject/filter_one">
 
 			<!-- crew type, limited to only director, producer, writer -->
-		    	Crew Type:<font color = "#FF0000">*&nbsp;</font>
-				<select id="dropDown" size = "Director" name = "PersonType">
-					<option value = "<Select>">Select</option>
+		    	Crew Type: <span class="star">*&nbsp;</span>
+				<select id="dropDown" size = "1" name = "PersonType">
+					<option value = "Select">Select</option>
 					<option value="Director">Director</option>
 					<option value="Producer">Producer</option>
                     <option value="Writer">Writer</option>
@@ -40,7 +40,7 @@
 			  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!-- person ID, limited to only number inputs -->
-				Person ID:<font color = "#FF0000">*&nbsp;</font>
+				Person ID: <span class="star">*&nbsp;</span>
 				<input id="numInput" type="number" min="1" name="PersonID" placeholder="1"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -50,14 +50,14 @@
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
                 </div>
-			</p>
+
 		</form>
 
 		<br/><br/><br/><br/><br/><br/>
 	
-		<center/>
-			<br/><br/>
-		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		<footer>
+			<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		</footer>
 	</section>    
 
 
