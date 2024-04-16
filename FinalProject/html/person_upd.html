@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
 		<meta charset="utf-8">
-		<title>FinalProject</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<title>Update a Person - FinalProject</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
 		<link rel="stylesheet" href="CSS/base.css" />
     </head>
@@ -11,49 +10,52 @@
 	<body>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<section>     
-	<head>
-		<div style="float: right;">
-			<!-- redirect to other pages -->
-			<p><a href="main_page.html">
-				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button  id="search" onclick="document.location='/FinalProject/personJdbc'" title="Search Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button  id="add" onclick="document.location='person_reg.html'" title="Add Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button  id="edit"  title="Edit Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button  id="delete" onclick="document.location='person_del.html'" title="Delete Person"></button>&nbsp;&nbsp;&nbsp;
-			</p>
-
-		</div>
-		<h2 id="pageTitle">Update Person</h2>
-	</head>  
-	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
-
+		<header>
+		
+			<div style="float: right;">
+				<!-- redirect to other pages -->
+				<p>
+					<button  id="home" onclick="document.location='main_page.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="search" onclick="document.location='/FinalProject/personJdbc'" title="Search Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="add" onclick="document.location='person_reg.html'" title="Add Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="edit" onclick="document.location='person_upd.html'" title="Edit Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="delete" onclick="document.location='person_del.html'" title="Delete Person"></button>&nbsp;&nbsp;&nbsp;
+				</p>
+			</div>
+			
+			<h2 id="pageTitle">Update Person</h2>
+		</header>  
+	
+		<p><span class="star">* Required Entry &nbsp;</span></p>
+	
+			<!-- Begin form code -->
 		<form method = "get" action = "/FinalProject/person_upd">
 			<!-- person ID, limited to only number inputs -->
-			<p>Person ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="PersonID"/>
+			<p>Person ID:  <span class="star">*&nbsp;</span>
+				<input class="numInput" type="number" min="1" name="PersonID"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 			<!--first name, any string characters -->
 				First Name:&nbsp;&nbsp;&nbsp;
-				<input id="numInput" type = "text" name = "FirstName" size="21">&nbsp;
+				<input class="numInput" type = "text" name = "FirstName" size="21">&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!--last name, any string characters -->
 				Last Name:&nbsp;&nbsp;&nbsp;
-				<input id="numInput" type = "text" name = "LastName" size="21">&nbsp;
+				<input class="numInput" type = "text" name = "LastName" size="21">&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!-- payk, limited to only number inputs -->
 				Pay (K):&nbsp;&nbsp;&nbsp;
-				<input id="numInput" type="number" min="1" name="PayK"/>
+				<input class="numInput" type="number" min="1" name="PayK"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
 
 			<!-- person type, limited to only actor, actress, director, producer, writer-->
 				PersonType:&nbsp;&nbsp;&nbsp;
-				<select id="dropDown" size = "Actor" name = "PersonType">
-					<option value = "<Select>">Select</option>
+				<select class="dropDown" size = "1" name = "PersonType">
+					<option value = "Select">Select</option>
 					<option value = "Actor">Actor</option>
 					<option value = "Actress">Actress</option>
 					<option value = "Director">Director</option>
@@ -71,9 +73,10 @@
 
 		<br/>
 	
-		<center>
-			<br/><br/>
-		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		<footer>
+			<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		</footer>
+
 	</section>    
 
 

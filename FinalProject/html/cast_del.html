@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
 		<meta charset="utf-8">
-		<title>FinalProject</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<title>Delete Cast Member - FinalProject</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
 		<link rel="stylesheet" href="CSS/base.css" />
     </head>
@@ -11,31 +10,34 @@
 	<body>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<section>     
-	<head>
+	<header>
 		
 		<div style="float: right;">
 			<!-- redirect to other pages -->
-			<p><a href="main_page.html">
-				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<p>
+			<button  id="home" onclick="document.location='main_page.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="search" onclick="document.location='/FinalProject/castJdbc'" title="Search Cast"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="add" onclick="document.location='cast_reg.html'" title="Add Cast"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="edit" onclick="document.location='cast_upd.html'" title="Edit Cast"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="delete" title="Delete Cast"></button>&nbsp;&nbsp;&nbsp;
+			<button  id="delete" onclick="document.location='cast_del.html'" title="Delete Cast"></button>&nbsp;&nbsp;&nbsp;
 			</p>
 		</div>
+		
 		<h2 id="pageTitle">Delete Cast</h2>
-	</head>  
-	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
+	</header>  
 
+	<p><span class="star">* Required Entry &nbsp;</span></p>
+
+		<!-- Begin form code -->
 		<form method = "get" action = "/FinalProject/cast_del">
 			<!-- cast ID, limited to only number inputs -->
-			<p>Cast ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="CastID"/>
+			<p>Cast ID: <span class="star">*&nbsp;</span>
+				<input class="numInput" type="number" min="1" name="CastID"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!-- person ID, limited to only number inputs -->
-				Person ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="PersonID"/>
+				Person ID: <span class="star">*&nbsp;</span>
+				<input class="numInput" type="number" min="1" name="PersonID"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 				<br/><br/><br/>
@@ -44,13 +46,14 @@
 				<input id="buttons" type = "reset" value = "Reset">
 			</p>
 		</form>
+		<!-- End Form code-->
 		<br/><br/><br/><br/><br/>
 	
-		<center>
-			<br/><br/>
+		<footer>
 		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
-	</section>    
-
+		</footer>    
+	
+	</section>
 
 	</body>
 </html>

@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
 		<meta charset="utf-8">
-		<title>FinalProject</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<title>Filter All Cast Members in a Movie - FinalProject</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
 		<link rel="stylesheet" href="CSS/base.css" />
     </head>
@@ -11,11 +10,11 @@
 	<body>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<section>     
-	<head>
+	<header>
 		<div style="float: right;">
 			<!-- redirect to other pages -->
-			<p><a href="main_page.html">
-				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<p>
+			<button  id="home" onclick="document.location='main_page.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="filter" onclick="document.location='filter_reg.html'" title="Filters"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="mTable" onclick="document.location='/FinalProject/movieJdbc'" title="Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button  id="pTable" onclick="document.location='/FinalProject/personJdbc'" title="Person"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -25,14 +24,14 @@
 			</p>
 		</div>
 		<h2 id="pageTitle">Filter All Cast Members in a Movie</h2>
-	</head>  
-	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
+	</header>  
+	<p> <span class="star">*&nbsp; Required Entry</span></p>
 
 		<form method = "get" action = "/FinalProject/filter_seven">
 
 			<!-- movie ID, limited to only number inputs -->
-				Movie ID:<font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="MovieID" placeholder="1"/>
+				Movie ID: <span class="star">*&nbsp;</span>
+				<input class="numInput" type="number" min="1" name="MovieID" placeholder="1"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
@@ -41,14 +40,14 @@
 				<input id="buttons" type = "submit" name = "Submit" value = "Submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="buttons" type = "reset" value = "Reset">
                 </div>
-			</p>
+
 		</form>
 
 		<br/><br/><br/><br/><br/><br/>
 	
-		<center/>
-			<br/><br/>
-		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		<footer>
+			<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		</footer>
 	</section>    
 
 

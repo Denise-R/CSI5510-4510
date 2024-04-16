@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
 		<meta charset="utf-8">
-		<title>CrewAdd</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<title>Add Crew Member - Final Project</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
 		<link rel="stylesheet" href="CSS/base.css" />
     </head>
@@ -11,37 +10,40 @@
 	<body>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<section>     
-	<head>
-		<div style="float: right;">
-			<!-- redirect to other pages -->
-			<p><a href="main_page.html">
-				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="search" onclick="document.location='/FinalProject/crewJdbc'" title="Search People"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="add"  title="Add Crew"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="edit" onclick="document.location='crew_upd.html'" title="Edit Crew"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="delete" onclick="document.location='crew_del.html'" title="Delete Crew"></button>&nbsp;&nbsp;&nbsp;
-			</p>
-
-		</div>
-		<h2 id="pageTitle">Add Crew</h2>
-	</head>  
-		<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
-
+		<header>
+		
+			<div style="float: right;">
+				<!-- redirect to other pages -->
+				<p>
+					<button  id="home" onclick="document.location='main_page.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="search" onclick="document.location='/FinalProject/crewJdbc'" title="Search Crew"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="add" onclick="document.location='crew_reg.html'" title="Add Crew"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="edit" onclick="document.location='crew_upd.html'" title="Edit Crew"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="delete" onclick="document.location='crew_del.html'" title="Delete Crew"></button>&nbsp;&nbsp;&nbsp;
+					</p>
+			</div>
+			
+			<h2 id="pageTitle">Add Crew</h2>
+		</header>  
+	
+		<p><span class="star">* Required Entry &nbsp;</span></p>
+	
+			<!-- Begin form code -->
 		<form method = "get" action = "/FinalProject/crew_reg">
 			<!-- person ID, limited to only number inputs -->
-			<p>Person ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="PersonID" />
+			<p>Person ID: <span class="star">*&nbsp;</span>
+				<input class="numInput" type="number" min="1" name="PersonID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!-- movie ID, limited to only number inputs -->
-				Movie ID: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="MovieID" />
+				Movie ID: <span class="star">*&nbsp;</span>
+				<input class="numInput" type="number" min="1" name="MovieID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 			<!--contribution, any string characters -->
 				Contribution:&nbsp;
-				<input id="numInput" type="text" name="Contribution"/>
+				<input class="numInput" type="text" name="Contribution"/>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
@@ -53,9 +55,10 @@
 
 		<br/><br/><br/><br/><br/><br/>
 	
-		<center>
-			<br/><br/>
-		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		<footer>
+			<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		</footer>
+
 	</section>    
 
 

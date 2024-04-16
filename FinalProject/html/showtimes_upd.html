@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
 		<meta charset="utf-8">
-		<title>ShowtimesUpdate</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<title>Update Showtimes - Final Project</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
 		<link rel="stylesheet" href="CSS/base.css" />
     </head>
@@ -11,29 +10,34 @@
 	<body>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<section>     
-	<head>
-		<div style="float: right;">
-			<!-- redirect to other pages -->
-			<p><a href="main_page.html">
-				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="search" onclick="document.location='/FinalProject/showtimesJdbc'" title="Search Showtimes"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="add" onclick="document.location='showtimes_reg.html'" title="Add Showtimes"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="edit" title="Edit Showtimes"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="delete" onclick="document.location='showtimes_del.html'" title="Delete Showtimes"></button>&nbsp;&nbsp;&nbsp;
-			</p>
-		</div>
-		<h2 id="pageTitle">Update Showtimes</h2>
-	</head> 
-	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
+		<header>
+		
+			<div style="float: right;">
+				<!-- redirect to other pages -->
+				<p>
+					<button  id="home" onclick="document.location='main_page.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="search" onclick="document.location='/FinalProject/showtimesJdbc'" title="Search Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="add" onclick="document.location='showtimes_reg.html'" title="Add Showtime"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="edit" onclick="document.location='showtimes_upd.html'" title="Edit Showtime"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="delete" onclick="document.location='showtimes_del.html'" title="Delete Showtime"></button>&nbsp;&nbsp;&nbsp;
+				</p>
+			</div>
+			
+			<h2 id="pageTitle">Updated Showtime</h2>
+		</header>  
+	
+		<p><span class="star">* Required Entry &nbsp;</span></p>
+	
+			<!-- Begin form code -->
 		<form method = "get" action = "/Movie/showtimes_upd">
 			<!-- showtime ID, limited to only number inputs -->
-			<p>ShowtimeID:<font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type="number" min="1" name="ShowtimeID" />
+			<p>ShowtimeID: <span class="star">*&nbsp;</span>
+				<input class="numInput" type="number" min="1" name="ShowtimeID" />
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!-- showtime, limited to only a date input -->
-				Showtime:<font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type = "datetime-local" name = "Showtime" size = "10">
+				Showtime: <span class="star">*&nbsp;</span>
+				<input class="numInput" type = "datetime-local" name = "Showtime" size = "10">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
@@ -46,9 +50,10 @@
 
 		<br/><br/><br/><br/><br/><br/>
 	
-		<center>
-			<br/><br/>
-		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		<footer>
+			<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		</footer>
+
 	</section>    
 
 

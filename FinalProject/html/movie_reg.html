@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
 		<meta charset="utf-8">
-		<title>FinalProject</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<title>Add Movie - FinalProject</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">       
 		<link rel="stylesheet" href="CSS/base.css" />
     </head>
@@ -11,43 +10,46 @@
 	<body>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<section>     
-	<head>
-		<div style="float: right;">
-			<!-- redirect to other pages -->
-			<p><a href="main_page.html">
-				<img border="0" src="CSS/Images/homeIcon.png" width="30" height="30"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="search" onclick="document.location='/FinalProject/movieJdbc'" title="Search Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="add" title="Add Movie"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="edit" onclick="document.location='movie_upd.html'" title="Edit Movie"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button  id="delete" onclick="document.location='movie_del.html'" title="Delete Movie" onclick="document.location='movie_del.html'"></button>&nbsp;&nbsp;&nbsp;
-			</p>
-
-		</div>
-		<h2 id="pageTitle">Add Movie</h2>
-	</head>  
-	<p><font color = "#FF0000">*Required entry&nbsp;</font></p>
-
+		<header>
+		
+			<div style="float: right;">
+				<!-- redirect to other pages -->
+				<p>
+					<button  id="home" onclick="document.location='main_page.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="search" onclick="document.location='/FinalProject/movieJdbc'" title="Search Movies"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="add" onclick="document.location='movie_reg.html'" title="Add Movie"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="edit" onclick="document.location='movie_upd.html'" title="Edit Movie"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="delete" onclick="document.location='movie_del.html'" title="Delete Movie"></button>&nbsp;&nbsp;&nbsp;
+				</p>
+			</div>
+			
+			<h2 id="pageTitle">Add Movie</h2>
+		</header>  
+	
+		<p><span class="star">* Required Entry &nbsp;</span></p>
+	
+			<!-- Begin form code -->
 		<form method = "get" action = "/FinalProject/movie_reg">
 			<!--movie title, any string characters -->
-			<p>Movie Title: <font color = "#FF0000">*&nbsp;</font>
-				<input id="numInput" type = "text" name = "Title" size="21">
+			<p>Movie Title:  <span class="star">*&nbsp;</span>
+				<input class="numInput" type = "text" name = "Title" size="21">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<!--synopsis, any string characters -->
-				Synopsis: <font color = "#FF0000">*&nbsp;</font>
+				Synopsis:  <span class="star">*&nbsp;</span>
 			   	<input id="descInput" type = "text" name = "Synopsis" size = "70"> 
 			   	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<!-- release date, limited by date input -->
-				Release Date: <font color = "#FF0000">*&nbsp;</font><input id="numInput" type = "date" name = "ReleaseDate" size = "10">
+				Release Date:  <span class="star">*&nbsp;</span><input class="numInput" type = "date" name = "ReleaseDate" size = "10">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
 
 				<!-- rating, limited by drop down options -->
-				Rating: <font color = "#FF0000">*&nbsp;</font>
-				<select id="dropDown" size = "1" name = "Rating">
-				<option value = "<Select>">Select</option>
+				Rating:  <span class="star">*&nbsp;</span>
+				<select class="dropDown" size = "1" name = "Rating">
+				<option value = "Select">Select</option>
 				<option value = "G">G</option>
 				<option value = "R">R</option>
 				<option value = "PG">PG</option>
@@ -57,14 +59,14 @@
 				
 				
 				<!-- duration, limited to number input -->
-				Duration (min): <font color = "#FF0000">*&nbsp;</font>
-			   	<input id="numInput" type="number" min="1" name = "LengthMin" size = "15">
+				Duration (min):  <span class="star">*&nbsp;</span>
+			   	<input class="numInput" type="number" min="1" name = "LengthMin">
 				   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<!-- category, limited by drop down options -->
-				Category: <font color = "#FF0000">*&nbsp;</font>
-				<select id="dropDown" size = "Action" name = "Category">
-					<option value = "<Select>">Select</option>
+				Category:  <span class="star">*&nbsp;</span>
+				<select class="dropDown" size = "1" name = "Category">
+					<option value = "Select">Select</option>
 					<option value = "Action">Action</option>
 					<option value = "Animation">Animation</option>
 					<option value = "Comedy">Comedy</option>
@@ -78,16 +80,16 @@
 				
 
 				<!-- cost mil, limited to number input -->
-				  Cost (mil): <font color = "#FF0000">*&nbsp;</font>
-				  <input id="numInput" type="number" min="1" name="CostMil" />
+				  Cost (mil):  <span class="star">*&nbsp;</span>
+				  <input class="numInput" type="number" min="1" name="CostMil" />
 				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 				<br/><br/><br/>
 
 				<!-- screening type, limited to comming soon or showing -->
-				Screening Type: <font color = "#FF0000">*&nbsp;</font>
-				<select id="dropDown" size = "Coming Soon" name = "ScreeningType">
-					<option value = "<Select>">Select</option>
+				Screening Type:  <span class="star">*&nbsp;</span>
+				<select class="dropDown" size = "1" name = "ScreeningType">
+					<option value = "Select">Select</option>
 					<option value = "Coming Soon">Coming Soon</option>
 					<option value = "Showing">Showing</option>
 				</select>
@@ -102,8 +104,10 @@
 
 		<br/>
 	
-		<center>
-		<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		<footer>
+			<p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p>
+		</footer>
+
 	</section>     
 
 
