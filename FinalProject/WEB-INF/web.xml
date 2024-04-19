@@ -7,22 +7,21 @@
 <web-app>
   
    <servlet>
-     <servlet-name>movie_upd</servlet-name>
-     <servlet-class>movie_upd</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-     <servlet-name>movie_upd</servlet-name>
-     <url-pattern>/movie_upd</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
      <servlet-name>movie_reg</servlet-name>
      <servlet-class>movie_reg</servlet-class>
   </servlet>
   <servlet-mapping>
      <servlet-name>movie_reg</servlet-name>
      <url-pattern>/movie_reg</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+     <servlet-name>movie_upd</servlet-name>
+     <servlet-class>movie_upd</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>movie_upd</servlet-name>
+     <url-pattern>/movie_upd</url-pattern>
   </servlet-mapping>
   
  <servlet>

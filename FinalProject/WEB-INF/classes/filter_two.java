@@ -14,11 +14,12 @@ public class filter_two extends HttpServlet
 			String query="";   
 			ResultSet alertResult = null;     
 			String alertQuery="";  
+			String p_type = "";
 
 			Connection con=null; 
           
 			// get parameters
-            String p_type = request.getParameter("PersonType");
+            p_type = request.getParameter("PersonType");
             String p_id = (request.getParameter("PersonID")).toString();
 
 		try
@@ -63,7 +64,7 @@ public class filter_two extends HttpServlet
 			alertResult = pstmt1.executeQuery();
 
 			// checking if p_type has been entered
-			if(p_type == "<Select>"){
+			if(p_type == "Select"){
 				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a cast type.\");}</script>");
 			}
 			// checking if person exists

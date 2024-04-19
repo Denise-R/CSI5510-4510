@@ -8,6 +8,7 @@ public class movie_reg extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
     {        
+			// declare variables 
 			Statement state4 = null;
 			ResultSet result = null;
 			String query1=""; 
@@ -16,7 +17,7 @@ public class movie_reg extends HttpServlet
 			Connection con=null; 
           
 			String m_title = request.getParameter("Title");
-			var date = request.getParameter("ReleaseDate");
+			m_date = request.getParameter("ReleaseDate");
 			String m_synopsis = request.getParameter("Synopsis");
 			String m_length = (request.getParameter("LengthMin")).toString();
 			String m_rating = request.getParameter("Rating");
@@ -24,17 +25,13 @@ public class movie_reg extends HttpServlet
 			String m_cost = (request.getParameter("CostMil")).toString();
 			String m_sType = request.getParameter("ScreeningType");
 
-			var month = (('0' + (date.getMonth() + 1)).slice(-2)). toString(); // Adding 1 because January is 0
-			var day = ('0' + date.getDate()).slice(-2);
-			var year = date.getFullYear();
-
-    		m_date = year + "-" + month +"-" + day;
 
 		try
 		{			
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
+           // connect to SQLPlus database	
+			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
             con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
-	       	System.out.println("Congratulations! You are connected successfully.");      
+	       	System.out.println("Congratulations! You are connected successfully.");
 	       	
      	}
         catch(SQLException e)
@@ -65,20 +62,25 @@ public class movie_reg extends HttpServlet
   			e.printStackTrace();
 		}
 
+
+		//write to html file
+		out.println("<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>FinalProject</title>");
+		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
+		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
+		
+
+
 		//TO_DATE('12-04-2024', 'DD-MM-YYYY')
 		
+		// build queries
 		query1 = "INSERT INTO MOVIE (MovieID, Title, ReleaseDate, Synopsis, Rating, LengthMin, Category, CostMil, ScreeningType) " +
-		" VALUES (seq_mov_id.nextval, '" + m_title + "', TO_DATE(''" + m_date + "'', 'YYYY-MM-DD'), ' " + m_synopsis + "', '" + m_rating + "', " + m_length + ", '" + m_cat + "', " + m_cost + ", '" + m_sType + "')";
+		" VALUES (seq_mov_id.nextval, '" + m_title + "', TO_DATE('" + m_date + "', 'YYYY-MM-DD'), '" + m_synopsis + "', '" + m_rating + "', " + m_length + ", '" + m_cat + "', " + m_cost + ", '" + m_sType + "')";
 
 		query2 = "SELECT MovieID, Title, ReleaseDate, Synopsis, Rating, LengthMin, Category, CostMil, ScreeningType FROM movie order by MovieID";
 
-
-		out.println("<html><head><title>FinalProject</title>");	 
-		out.println("</head><body>");
-		
-		out.print( "<br /><b><center><font color=\"RED\"><H2>Movie Table</H2></font>");
-        out.println( "</center><br />" );
-       	try 
+		//exec query
+		try 
 		{ 
 			result=state4.executeQuery(query1);
 			result=state4.executeQuery(query2);
@@ -87,32 +89,44 @@ public class movie_reg extends HttpServlet
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
-		out.println("<center><table border=\"1\">"); 
-		out.println("<tr BGCOLOR=\"#cccccc\">");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Movie ID</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Title</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Release Date</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Synopsis</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Rating</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Duration (min)</td>");
-        out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Category</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Cost (mil)</td>");
-		out.println("<td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">Screening Type</td>");
+
+		//write to html
+		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
+		out.println("<head><div style=\"float: right;\">");
+		out.println("<p><a href=\"\\FinalProject\\html\\main_page.html\">");
+		out.println("<img border=\"0\" src=\"\\FinalProject\\html\\CSS\\Images\\homeIcon.png\" width=\"30\" height=\"30\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+		out.println("</p></div><h2 id=\"pageTitle\">Movie Table</h2></head>");
+		// alert query to notify that movie has been added
+		out.println("<script>function showAlertOnLoad() {alert(\"You have added the movie " + m_title + " \");}</script>");
+		
+		out.println("<center><table>"); 
+		out.println("<tr>");
+        out.println("<th>Movie ID</th>");
+        out.println("<th>Title</th>");
+        out.println("<th>Release Date</th>");
+        out.println("<th>Synopsis</th>");
+		out.println("<th>Rating</th>");
+		out.println("<th>Duration (min)</th>");
+        out.println("<th>Category</th>");
+		out.println("<th>Cost (mil)</th>");
+		out.println("<th>Screening Type</th>");
         out.println("</tr>");
+
+		//get table data from query executed
 		try 
 		{ 
             while(result.next()) 
 			{ 
 		    	out.println("<tr>");
-                out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(1)+"</td>");
-		    	out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(2)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(3)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(4)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(5)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(6)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(7)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(8)+"</td>");
-				out.println("     <td align = \"justify\"><font face =\"times new roman\"  size=\"4pt\">"+result.getString(9)+"</td>");
+                out.println("     <td>"+result.getString(1)+"</td>");
+		    	out.println("     <td>"+result.getString(2)+"</td>");
+				out.println("     <td>"+result.getString(3)+"</td>");
+				out.println("     <td>"+result.getString(4)+"</td>");
+				out.println("     <td>"+result.getString(5)+"</td>");
+				out.println("     <td>"+result.getString(6)+"</td>");
+				out.println("     <td>"+result.getString(7)+"</td>");
+				out.println("     <td>"+result.getString(8)+"</td>");
+				out.println("     <td>"+result.getString(9)+"</td>");
                 out.println("</tr>");
 			} 
 	    }
@@ -134,6 +148,8 @@ public class movie_reg extends HttpServlet
 			e.printStackTrace();	
 		}
 
-  		out.println("</body></html>");
+  		//finish html document
+		out.println("<center><br/><br/><p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p></section>");
+		out.println("</body></html>");
     } 
 }
