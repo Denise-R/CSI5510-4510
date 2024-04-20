@@ -7,6 +7,16 @@
 <web-app>
   
    <servlet>
+     <servlet-name>movie_upd</servlet-name>
+     <servlet-class>movie_upd</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+     <servlet-name>movie_upd</servlet-name>
+     <url-pattern>/movie_upd</url-pattern>
+  </servlet-mapping>
+
+   <servlet>
      <servlet-name>movie_reg</servlet-name>
      <servlet-class>movie_reg</servlet-class>
   </servlet>
@@ -15,14 +25,6 @@
      <url-pattern>/movie_reg</url-pattern>
   </servlet-mapping>
 
-  <servlet>
-     <servlet-name>movie_upd</servlet-name>
-     <servlet-class>movie_upd</servlet-class>
-  </servlet>
-  <servlet-mapping>
-     <servlet-name>movie_upd</servlet-name>
-     <url-pattern>/movie_upd</url-pattern>
-  </servlet-mapping>
   
  <servlet>
      <servlet-name>movieJdbc</servlet-name>
@@ -199,6 +201,7 @@
      <url-pattern>/showtimesJdbc</url-pattern>
   </servlet-mapping>
   
+  
   <servlet>
      <servlet-name>showtimes_del</servlet-name>
      <servlet-class>showtimes_del</servlet-class>
@@ -219,6 +222,15 @@
      <url-pattern>/showtimes_upd</url-pattern>
   </servlet-mapping>
 
+   <servlet>
+     <servlet-name>theaterJdbc</servlet-name>
+     <servlet-class>theaterJdbc</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+     <servlet-name>theaterJdbc</servlet-name>
+     <url-pattern>/theaterJdbc</url-pattern>
+  </servlet-mapping>
 
 
    <servlet>

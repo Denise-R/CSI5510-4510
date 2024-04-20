@@ -57,11 +57,29 @@ public class person_reg extends HttpServlet
   			e.printStackTrace();
 		}
 
+		if (p_type.equals("Select")) {
+			// If "Select" is chosen, display an error message or handle accordingly
+			out.println("<script>function showAlertOnLoad() {alert(\"Error: Please choose a valid option other than 'Select' for the person type.\");}</script>");
+		}
+		else{
+			// build query
+			query1 = "INSERT INTO PERSON(PersonID, LastName, FirstName, PayK, PersonType) " +
+			" VALUES(seq_per_id.nextval, '" + p_lname + "', '" + p_fname + "', " + p_pay + ", '" + p_type + "')";
+
+			//exec query
+			try 
+			{ 
+				result=state4.executeQuery(query1);
+				out.println("<script>function showAlertOnLoad() {alert(\"You have added the person " + p_fname + " " + p_lname + "\");}</script>");
+
+			}
+			catch (SQLException e) 
+			{
+				System.err.println("SQLException while executing SQL Statement."); 
+			}
+		}
 		
 		
-		// build query
-		query1 = "INSERT INTO PERSON(PersonID, LastName, FirstName, PayK, PersonType) " +
-        " VALUES(seq_per_id.nextval, '" + p_lname + "', '" + p_fname + "', " + p_pay + ", '" + p_type + "')";
 
 		query2 = "SELECT PersonID, FirstName,  LastName, PayK, PersonType FROM person order by PersonID";
 
@@ -70,14 +88,12 @@ public class person_reg extends HttpServlet
 		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
 		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
-		out.println("<script>function showAlertOnLoad() {alert(\"You have added the person " + p_fname + " " + p_lname + "\");}</script>");
 		
 		
 
 		//exec query
        	try 
 		{ 
-			result=state4.executeQuery(query1);
 			result=state4.executeQuery(query2);
 	  	}
 		catch (SQLException e) 

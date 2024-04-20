@@ -63,13 +63,15 @@ public class filter_eight extends HttpServlet
 			alertResult = pstmt1.executeQuery();
 
 			// checking if p_type has been entered
-			if(c_type == "<Select>"){
-				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a crew type.\");}</script>");
+			if (c_type.equals("Select")) {
+				// If "Select" is chosen, display an error message or handle accordingly
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please choose a valid option other than 'Select'\");}</script>");
 			}
 			// checking if person exists
 			if(!alertResult.next()){
 				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered either does not exist or does not belong to a crew member. Please reference the Person table.\");}</script>");
 			}
+			
 		}
 		catch (SQLException e) 
 		{

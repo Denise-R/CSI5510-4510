@@ -7,30 +7,31 @@ public class movie_upd extends HttpServlet
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException,IOException
-    {        
-		 // declare variables 
+    {        // declare variables  
 			Statement state4 = null;
-			ResultSet alertResult = null;       
 			ResultSet result = null;
+			ResultSet alertResult = null;        
 			String query1="";        
-			String query2="";    
-			String alertQuery="";  
+			String alertQuery="";   
+			String m_date="";
+			String query2="";        
 			Connection con=null; 
-          
-			// get parameters
-            String m_id = request.getParameter("m_id");
-			String m_title = request.getParameter("m_title");
-			String m_date = request.getParameter("m_date");
-			String m_synopsis = request.getParameter("m_synopsis");
-			String m_length = request.getParameter("m_length");
-			String rating_id = request.getParameter("rating_id");
-			String cat_id = request.getParameter("cat_id");
+
+			String m_id = (request.getParameter("MovieID")).toString();
+			String m_title = request.getParameter("Title");
+			m_date = request.getParameter("ReleaseDate");
+			String m_synopsis = request.getParameter("Synopsis");
+			String m_length = (request.getParameter("LengthMin")).toString();
+			String m_rating = request.getParameter("Rating");
+			String m_cat = request.getParameter("Category");
+			String m_cost = (request.getParameter("CostMil")).toString();
+			String m_sType = request.getParameter("ScreeningType");
 
 		try
-		{			
-			// connect to SQLPlus database
+		{	
+			// connect to SQLPlus database			
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver()); 
-            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "project", "project");
+            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "finalProject", "finalProject");
 	       	System.out.println("Congratulations! You are connected successfully.");      
      	}
         catch(SQLException e)
@@ -60,48 +61,50 @@ public class movie_upd extends HttpServlet
 		{
   			e.printStackTrace();
 		}
+		if (m_cat.equals("Select") || m_rating.equals("Select") || m_sType.equals("Select")) {
+			// If "Select" is chosen, display an error message or handle accordingly
+			out.println("<script>function showAlertOnLoad() {alert(\"Error: Please choose a valid option other than 'Select' for the movie rating, category, and screening type.\");}</script>");
+		}
+		else if (m_date == null || m_date.trim().isEmpty()) {
+			out.println("<script>function showAlertOnLoad() {alert(\"Error: Please enter a value for the movie release date.\");}</script>");
+        }
+		else{
+			// alert query to notify that movie has been deleted
+			try 
+			{ 
+				// check if movie id is valid
+				alertQuery="SELECT title FROM movie where movieID = '" + m_id + "'";
+				PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
+				alertResult = pstmt1.executeQuery();
 
-		// alert query to notify that person has been updated
-		try 
-		{ 
-			// creating alert queries
-			alertQuery="SELECT title FROM movie where movieID = '" + m_id + "'";
-			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
-			alertResult = pstmt1.executeQuery();
+				// displaying alert if movie id is not valid
+				if(!alertResult.next()){
+					out.println("<script>function showAlertOnLoad() {alert(\"Error: The movie you tried to update does not exist. Check to make sure the movie ID you entered is the one you intended.\");}</script>");
+				}
+				else
+				{
+					// exec queries to delete movie
+					try{
+						// creating alert that movie was deleted
+						String title = alertResult.getString("title");
+						out.println("<script>function showAlertOnLoad() {alert(\"You have updated the movie " + title + "\");}</script>");
 
-			// checking if movie exists
-			if(!alertResult.next()){
-				out.println("<script>function showAlertOnLoad() {alert(\"Error: The movie ID you entered is not valid. Please reference the Movie table.\");}</script>");
-			}
-			else{
-				try{
-					// creating alert query that person was updated
-					String old_title = alertResult.getString("title");
-					out.println("<script>function showAlertOnLoad() {alert(\"You have updated the movie " + old_title + "\");}</script>");
-					try 
-					{ 
-						// building and exec update query
-						query1 = "update  movie set m_title = '"+m_title+"', m_date = TO_DATE('" + m_date + "', 'YYYY-MM-DD'), m_length = '"+m_length+"', rating_id = '"+rating_id+"', cat_id = '"+cat_id+"', m_synopsis = '"+m_synopsis+"'	where m_id = '"+m_id+"'";
-						result=state4.executeQuery(query1);
+							// building and executing delete queries
+							query1 = "update MOVIE set Title = '" + m_title + "', ReleaseDate = TO_DATE('" + m_date + "', 'YYYY-MM-DD'), Synopsis = '" + m_synopsis + "', Rating = '" + m_rating + "', LengthMin = '" + m_length + "', Category = '" + m_cat + "', CostMil = '" + m_cost + "', ScreeningType = '" + m_sType + "' where MovieID = '" + m_id + "'";
+							result=state4.executeQuery(query1);
 					}
 					catch (SQLException e) 
 					{
 						System.err.println("SQLException while executing SQL Statement."); 
 					}
 				}
-				catch (SQLException e) 
-				{
-					System.err.println("SQLException while executing SQL Statement."); 
-				}
 			}
-
-	  	}
-		
-		catch (SQLException e) 
-		{
-			System.err.println("SQLException while executing SQL Statement."); 
+			catch (SQLException e) 
+			{
+				System.err.println("SQLException while executing SQL Statement."); 
+			}
 		}
-
+		
 
 		
 		// build query
@@ -122,7 +125,6 @@ public class movie_upd extends HttpServlet
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
-
 
 		//write to html
 		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
@@ -167,6 +169,8 @@ public class movie_upd extends HttpServlet
 		}
 
 		out.println("</table></CENTER>");
+
+		// close connection
 		try 
 		{ 
    			result.close(); 
@@ -179,8 +183,8 @@ public class movie_upd extends HttpServlet
 			e.printStackTrace();	
 		}
 
-  		//finish html document
+		//finish html document
 		out.println("<center><br/><br/><p><b>Created By: Guohuan Feng, Edie Harvey, Kevin Karafili, Allison Offer, Denise Rauschendorfer</b></p></section>");
-		out.println("</body></html>");
+  		out.println("</body></html>");
     } 
 }

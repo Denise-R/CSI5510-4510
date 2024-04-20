@@ -59,51 +59,58 @@ public class person_upd extends HttpServlet
   			e.printStackTrace();
 		}	
 		
-		// alert query to notify that person has been updated
-		try 
-		{ 
-			// creating alert queries
-			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
-			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
-			alertResult = pstmt1.executeQuery();
+		if (p_type.equals("Select")) {
+			// If "Select" is chosen, display an error message or handle accordingly
+			out.println("<script>function showAlertOnLoad() {alert(\"Error: Please choose a valid option other than 'Select' for the person type.\");}</script>");
+		}
+		else{
+			// alert query to notify that person has been updated
+			try 
+			{ 
+				// creating alert queries
+				alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
+				PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
+				alertResult = pstmt1.executeQuery();
 
-			// checking if p_type has been entered
-			if(p_type == "<Select>"){
-				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a person type.\");}</script>");
-			}
-			// checking if person exists
-			if(!alertResult.next()){
-				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered is not valid. Please reference the Person table.\");}</script>");
-			}
-			else{
-				try{
-					// creating alert query that person was updated
-					String fname = alertResult.getString("FirstName");
-					String lname = alertResult.getString("LastName");
-					out.println("<script>function showAlertOnLoad() {alert(\"You have updated the person " + fname + " " + lname + "\");}</script>");
-					try 
-					{ 
-						// building and exec update query
-						query1 = " update person set LastName = '"+p_lname+"', FirstName = '"+p_fname+"', PayK = '"+p_pay+"', PersonType = '"+p_type+"' where personID = '"+p_id+"'";			
-						result=state4.executeQuery(query1);
+				// checking if p_type has been entered
+				if(p_type == "<Select>"){
+					out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a person type.\");}</script>");
+				}
+				// checking if person exists
+				if(!alertResult.next()){
+					out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered is not valid. Please reference the Person table.\");}</script>");
+				}
+				else{
+					try{
+						// creating alert query that person was updated
+						String fname = alertResult.getString("FirstName");
+						String lname = alertResult.getString("LastName");
+						out.println("<script>function showAlertOnLoad() {alert(\"You have updated the person " + fname + " " + lname + "\");}</script>");
+						try 
+						{ 
+							// building and exec update query
+							query1 = " update person set LastName = '"+p_lname+"', FirstName = '"+p_fname+"', PayK = '"+p_pay+"', PersonType = '"+p_type+"' where personID = '"+p_id+"'";			
+							result=state4.executeQuery(query1);
+						}
+						catch (SQLException e) 
+						{
+							System.err.println("SQLException while executing SQL Statement."); 
+						}
 					}
 					catch (SQLException e) 
 					{
 						System.err.println("SQLException while executing SQL Statement."); 
 					}
 				}
-				catch (SQLException e) 
-				{
-					System.err.println("SQLException while executing SQL Statement."); 
-				}
-			}
 
-	  	}
-		
-		catch (SQLException e) 
-		{
-			System.err.println("SQLException while executing SQL Statement."); 
+			}
+			
+			catch (SQLException e) 
+			{
+				System.err.println("SQLException while executing SQL Statement."); 
+			}
 		}
+		
 		
 		
 		query2 = "SELECT PersonID, FirstName,  LastName, PayK, PersonType FROM person order by PersonID";

@@ -63,8 +63,9 @@ public class filter_one extends HttpServlet
 			alertResult = pstmt1.executeQuery();
 
 			// checking if p_type has been entered
-			if(p_type == "<Select>"){
-				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a crew type.\");}</script>");
+			if (p_type.equals("Select")) {
+				// If "Select" is chosen, display an error message or handle accordingly
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please choose a valid option other than 'Select'\");}</script>");
 			}
 			// checking if person exists
 			if(!alertResult.next()){

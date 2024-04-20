@@ -74,33 +74,21 @@ public class movie_del extends HttpServlet
 			}
 			else
 			{
-				// exec queries to delete movie
-				try{
+
 					// creating alert that movie was deleted
 					String title = alertResult.getString("title");
+					
+					// building and executing delete queries
+					query1 = "delete from cast where MovieID = '" + m_id + "'";
+					query2 = "delete from crew where MovieID = '" + m_id + "'";
+					query3 = "delete from showtimes where MovieID = '" + m_id + "'";
+					query4 = "delete from movie where MovieID = '" + m_id + "'";
+					result=state4.executeQuery(query1);
+					result=state4.executeQuery(query2);
+					result=state4.executeQuery(query3);
+					result=state4.executeQuery(query4);
 					out.println("<script>function showAlertOnLoad() {alert(\"You have deleted the movie " + title + "\");}</script>");
-					try 
-					{ 
-						// building and executing delete queries
-						query1 = "delete from cast where MovieID = '" + m_id + "'";
-						query2 = "delete from crew where MovieID = '" + m_id + "'";
-						query3 = "delete from showtimes where MovieID = '" + m_id + "'";
-						query4 = "delete from movie where MovieID = '" + m_id + "'";
-						result=state4.executeQuery(query1);
-						result=state4.executeQuery(query2);
-						result=state4.executeQuery(query3);
-						result=state4.executeQuery(query4);
 							
-					}
-					catch (SQLException e) 
-					{
-						System.err.println("SQLException while executing SQL Statement."); 
-					}
-				}
-				catch (SQLException e) 
-				{
-					System.err.println("SQLException while executing SQL Statement."); 
-				}
 			}
 	  	}
 		catch (SQLException e) 
@@ -116,19 +104,7 @@ public class movie_del extends HttpServlet
 		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
 		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
-		
-		//exec query
-		try{
-			while (alertResult.next()) {
-			
-				String title = alertResult.getString("title");
-				out.println("<script>function showAlertOnLoad() {alert(\"You have deleted the movie " + title + "\");}</script>");
-			}
-		}
-		catch (SQLException e) 
-		{
-			System.err.println("SQLException while executing SQL Statement."); 
-		}
+
 
 
 		//exec table query

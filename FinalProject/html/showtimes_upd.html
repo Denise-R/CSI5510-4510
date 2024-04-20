@@ -17,6 +17,7 @@
 				<p>
 					<button  id="home" onclick="document.location='main_page.html'" title="Home"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button  id="search" onclick="document.location='/FinalProject/showtimesJdbc'" title="Search Showtimes"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button  id="theater" onclick="document.location='/FinalProject/theaterJdbc'" title="Search Theaters"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button  id="add" onclick="document.location='showtimes_reg.html'" title="Add Showtime"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button  id="edit" onclick="document.location='showtimes_upd.html'" title="Edit Showtime"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button  id="delete" onclick="document.location='showtimes_del.html'" title="Delete Showtime"></button>&nbsp;&nbsp;&nbsp;
@@ -29,7 +30,7 @@
 		<p><span class="star">* Required Entry &nbsp;</span></p>
 	
 			<!-- Begin form code -->
-		<form method = "get" action = "/Movie/showtimes_upd">
+		<form method = "get" action = "/FinalProject/showtimes_upd">
 			<!-- showtime ID, limited to only number inputs -->
 			<p>ShowtimeID: <span class="star">*&nbsp;</span>
 				<input class="numInput" type="number" min="1" name="ShowtimeID" />

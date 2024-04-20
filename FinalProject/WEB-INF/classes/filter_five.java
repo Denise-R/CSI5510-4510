@@ -64,12 +64,15 @@ public class filter_five extends HttpServlet
 			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
 			alertResult = pstmt1.executeQuery();
 
-			// checking if p_type has been entered
-			if(crew_type == "<Select>"){
-				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a crew type.\");}</script>");
+
+			if (crew_type.equals("Select")) {
+				// If "Select" is chosen, display an error message or handle accordingly
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please choose a valid option other than 'Select' for crew type\");}</script>");
 			}
-			if(cast_type == "<Select>"){
-				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a cast type.\");}</script>");
+		
+			if (cast_type.equals("Select")) {
+				// If "Select" is chosen, display an error message or handle accordingly
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please choose a valid option other than 'Select' for cast type\");}</script>");
 			}
 			// checking if person exists
 			if(!alertResult.next()){

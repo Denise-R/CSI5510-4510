@@ -83,13 +83,13 @@ float: right;
   width: 120px;
 }
 
-#buttons, #home, #search, #add, #edit, #delete, #filter, #mTable, #castTable, #crewTable, #pTable, #sTable, #pageButtons{
+#buttons, #home, #search, #theater, #add, #edit, #delete, #filter, #mTable, #castTable, #crewTable, #pTable, #sTable, #pageButtons{
   background-color: #4472C4; 
   color: black; 
   border: 2px solid black;
 }
 
-#buttons:hover, #home:hover, #search:hover, #add:hover, #edit:hover, #delete:hover, #filter:hover, #mTable:hover, #castTable:hover, #crewTable:hover, #pTable:hover, #sTable:hover, #pageButtons:hover{
+#buttons:hover, #home:hover, #search:hover, #theater:hover, #add:hover, #edit:hover, #delete:hover, #filter:hover, #mTable:hover, #castTable:hover, #crewTable:hover, #pTable:hover, #sTable:hover, #pageButtons:hover{
 background-color: white;
   color: black;
 }
@@ -143,6 +143,17 @@ border: none;
     background: url('Images/searchIcon.png');
     background-repeat: 3px 5px no-repeat;
   }
+
+  #theater{
+    border: none;
+      display: inline-block;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      height: 30px;
+      width: 30px;
+      background: url('Images/theaterIcon.png');
+      background-repeat: 3px 5px no-repeat;
+    }
 
 #add{
   border: none;

@@ -12,9 +12,11 @@ public class cast_reg extends HttpServlet
 			Statement state4 = null;
 			ResultSet result = null;
 			ResultSet alertResult = null;      
+			ResultSet alertResult3 = null;      
 			String query1=""; 
 			String query2=""; 
 			String alertQuery="";  
+			String alertQuery3="";  
 
 			Connection con=null; 
           
@@ -62,19 +64,53 @@ public class cast_reg extends HttpServlet
 		// alert query to notify that person has been deleted
 		try 
 		{ 
-			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "'";
+			//Queries to check if user entries are valid
+			alertQuery="SELECT FirstName, LastName FROM person where PersonID = '" + p_id + "' and PersonType in ('Actor', 'Actress')";
+			alertQuery3="SELECT title from movie where movieID = '" + m_id + "'";
 			PreparedStatement pstmt1 = con.prepareStatement(alertQuery);
 			alertResult = pstmt1.executeQuery();
+			PreparedStatement pstmt3 = con.prepareStatement(alertQuery3);
+			alertResult3 = pstmt3.executeQuery();
 
+			// Checking if person_id is valid
+			if(!alertResult.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered is not valid or this person is not listed as an actor or actress.\");}</script>");
+			}
+			// Checking if movieID is valid
+			else if(!alertResult3.next()){
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: The movie ID you entered is not valid.\");}</script>");
+			}
+			else
+			{
+
+				// creating update alert
+				String fname = alertResult.getString("FirstName");
+				String lname = alertResult.getString("LastName");
+				
+				try 
+				{ 
+					// build insert query
+					query1 = "INSERT INTO CAST(CastID, CharName, MovieID, PersonID) " +
+					" VALUES(seq_cast_id.nextval, '" + char_name + "', '" + m_id + "', '" + p_id + "')";
+					result=state4.executeQuery(query1);
+					out.println("<script>function showAlertOnLoad() {alert(\"You have added one record for the cast member " + fname + " " + lname + " \");}</script>");
+						
+				}
+				catch (SQLException e) 
+				{
+					System.err.println("SQLException while executing SQL Statement."); 
+				}
+
+
+			}
+		
 	  	}
 		catch (SQLException e) 
 		{
 			System.err.println("SQLException while executing SQL Statement."); 
 		}
-		
-		// build query
-		query1 = "INSERT INTO CAST(CastID, CharName, MovieID, PersonID) " +
-		" VALUES(seq_cast_id.nextval, '" + char_name + "', '" + m_id + "', '" + p_id + "')";
+
+
 
 		query2 = "select c.CastID, m.MovieID, m.title, p.PersonID, p.FirstName, p.LastName,  c.CharName, p.PayK, p.PersonType FROM MOVIE m, PERSON p, CAST c WHERE m.MovieID = c.MovieID AND p.personID = c.personID order by c.CastID";
 		
@@ -85,20 +121,6 @@ public class cast_reg extends HttpServlet
 		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
 		
-		//exec query
-		try{
-			while (alertResult.next()) {
-
-				String fname = alertResult.getString("FirstName");
-				String lname = alertResult.getString("LastName");
-				out.println("<script>function showAlertOnLoad() {alert(\"You have added one record for the cast member " + fname + " " + lname + " \");}</script>");
-
-			}
-		}
-		catch (SQLException e) 
-		{
-			System.err.println("SQLException while executing SQL Statement."); 
-		}
 
 		//write to html
 		out.println("</head><body onload=\"showAlertOnLoad()\"><br/><br/><br/><br/><br/><br/><br/><section id=\"javaSection\">");
@@ -122,7 +144,6 @@ public class cast_reg extends HttpServlet
 		//exec query
        	try 
 		{ 
-			result=state4.executeQuery(query1);
 			result=state4.executeQuery(query2);
 
 	  	}

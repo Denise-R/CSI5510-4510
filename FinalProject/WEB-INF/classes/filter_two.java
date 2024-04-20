@@ -64,11 +64,12 @@ public class filter_two extends HttpServlet
 			alertResult = pstmt1.executeQuery();
 
 			// checking if p_type has been entered
-			if(p_type == "Select"){
-				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please select a cast type.\");}</script>");
+			if (p_type.equals("Select")) {
+				// If "Select" is chosen, display an error message or handle accordingly
+				out.println("<script>function showAlertOnLoad() {alert(\"Error: Please choose a valid option other than 'Select'\");}</script>");
 			}
 			// checking if person exists
-			if(!alertResult.next()){
+			else if(!alertResult.next()){
 				out.println("<script>function showAlertOnLoad() {alert(\"Error: The person ID you entered is not valid. Please reference the Person table.\");}</script>");
 			}
 		}

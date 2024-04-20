@@ -69,20 +69,39 @@ public class movie_reg extends HttpServlet
 		out.println("<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\"> ");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"\\FinalProject\\html\\CSS\\base.css\">");
 		
-
-
+		if (m_cat.equals("Select") || m_rating.equals("Select") || m_sType.equals("Select")) {
+			// If "Select" is chosen, display an error message or handle accordingly
+			out.println("<script>function showAlertOnLoad() {alert(\"Error: Please choose a valid option other than 'Select' for the movie rating, category, and screening type.\");}</script>");
+		}
+		else if (m_date == null || m_date.trim().isEmpty()) {
+			out.println("<script>function showAlertOnLoad() {alert(\"Error: Please enter a value for the movie release date.\");}</script>");
+        }
+		else{
+			query1 = "INSERT INTO MOVIE (MovieID, Title, ReleaseDate, Synopsis, Rating, LengthMin, Category, CostMil, ScreeningType) " +
+			" VALUES (seq_mov_id.nextval, '" + m_title + "', TO_DATE('" + m_date + "', 'YYYY-MM-DD'), '" + m_synopsis + "', '" + m_rating + "', " + m_length + ", '" + m_cat + "', " + m_cost + ", '" + m_sType + "')";
+	
+			//exec query
+			try 
+			{ 
+				result=state4.executeQuery(query1);
+						
+				// alert query to notify that movie has been added
+				out.println("<script>function showAlertOnLoad() {alert(\"You have added the movie " + m_title + " \");}</script>");
+			}
+			catch (SQLException e) 
+			{
+				System.err.println("SQLException while executing SQL Statement."); 
+			}
+		}
 		//TO_DATE('12-04-2024', 'DD-MM-YYYY')
 		
 		// build queries
-		query1 = "INSERT INTO MOVIE (MovieID, Title, ReleaseDate, Synopsis, Rating, LengthMin, Category, CostMil, ScreeningType) " +
-		" VALUES (seq_mov_id.nextval, '" + m_title + "', TO_DATE('" + m_date + "', 'YYYY-MM-DD'), '" + m_synopsis + "', '" + m_rating + "', " + m_length + ", '" + m_cat + "', " + m_cost + ", '" + m_sType + "')";
-
+		
 		query2 = "SELECT MovieID, Title, ReleaseDate, Synopsis, Rating, LengthMin, Category, CostMil, ScreeningType FROM movie order by MovieID";
 
 		//exec query
 		try 
 		{ 
-			result=state4.executeQuery(query1);
 			result=state4.executeQuery(query2);
 	  	}
 		catch (SQLException e) 
@@ -96,8 +115,6 @@ public class movie_reg extends HttpServlet
 		out.println("<p><a href=\"\\FinalProject\\html\\main_page.html\">");
 		out.println("<img border=\"0\" src=\"\\FinalProject\\html\\CSS\\Images\\homeIcon.png\" width=\"30\" height=\"30\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 		out.println("</p></div><h2 id=\"pageTitle\">Movie Table</h2></head>");
-		// alert query to notify that movie has been added
-		out.println("<script>function showAlertOnLoad() {alert(\"You have added the movie " + m_title + " \");}</script>");
 		
 		out.println("<center><table>"); 
 		out.println("<tr>");
